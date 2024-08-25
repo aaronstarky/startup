@@ -36,3 +36,25 @@ There are three main phases:
 - started with 18 tags and has grown to over 100 tags
 - controlled by W3C
 
+### HTTP and URL
+- HTTP and URL define the way that documents are addressed and transferred over the internet
+
+### CSS
+- became standard in 1996
+- version 2.1 removed all error and implemented compatibility between CSS syntaxes
+- uses:
+    - import fonts
+    - animate HTML elements
+    - respond to user actions
+    - dynamically alter the entire layout of a page based on device size and orientation
+
+### JavaScript
+- NetScape decided to add the ability to script web pages
+- Brendan Eich created the syntax and named it JavaScript
+- in 1996 NetScape turned control of JS to ECMA Internation at which point it got the name ECMA script
+- Proprietary wars followed and eventually vendors decided to merge together on ECMAScript 5 in 2009. Then in 2015, ECMAScript received its last major feature upgrade
+
+#### JS Outside the browser
+- 2009 Ryan Dahl creates Node.js to deploy JS outside the browser
+- 2013, JSON is standardized and
+- 2012, TypeScript is created
