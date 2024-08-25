@@ -52,8 +52,21 @@ Matches List View
 ![matchList](MatchList.png)
 
 ## HTML Deliverable
+- [ ] add login html elements
+- [ ] add navigation for homepage --> match setup and homepage --> match list
+- [ ] match setup
+	- [ ] placeholder for list of friends / list of users
+	- [ ] start button
+- [ ] match tracking
+	- [ ] placeholder for scores
+	- [ ] buttons for player1 and player2
+	- [ ] undo button
+	- [ ] exit button
+- [ ] match list
+	- [ ] placeholder for list of matches
 
 ## CSS Deliverable
+- [ ] Add favicon.ico 
 
 ## React Deliverable
 
