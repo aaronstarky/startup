@@ -25,3 +25,20 @@ PaddleKing is the opportunity for you to gamify and track the hours you spend pl
 - **WebSocket Data** - receiving matchmaking requests in real-time
 
 ### Design Specification
+#### Login
+![login](LOGIN.png)
+
+#### Register
+![register](REGISTER.png)
+
+#### Homepage
+![homepage](homepage.png)
+
+#### Match Setup
+![matchSetup](MatchSetupPage.png")
+
+#### Match Tracking
+![matchTracking](MatchTracking.png")
+
+#### Matches List View
+![matchList](MatchList.png")
