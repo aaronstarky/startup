@@ -34,10 +34,10 @@ I will use all the required technologies in the following ways. Some of these ma
 
 ### Design
 Login
-![login](LOGIN.png)
+![login](Login.png)
 
 Register
-![register](REGISTER.png)
+![register](Register.png)
 
 Homepage
 ![homepage](Homepage.png)
