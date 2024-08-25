@@ -42,3 +42,15 @@ PaddleKing is the opportunity for you to gamify and track the hours you spend pl
 
 #### Matches List View
 ![matchList](MatchList.png)
+
+## HTML Deliverable
+
+## CSS Deliverable
+
+## React Deliverable
+
+## Service Deliverable
+
+## DB/Login Deliverable
+
+## WebSocket Deliverable
