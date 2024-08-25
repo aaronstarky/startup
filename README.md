@@ -35,7 +35,7 @@ PaddleKing is the opportunity for you to gamify and track the hours you spend pl
 ![homepage](homepage.png)
 
 #### Match Setup
-![matchSetup](MatchSetupPage.png")
+![matchSetup](MatchSetup.png)
 
 #### Match Tracking
 ![matchTracking](MatchTracking.png)
