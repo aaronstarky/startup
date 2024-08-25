@@ -58,3 +58,10 @@ There are three main phases:
 - 2009 Ryan Dahl creates Node.js to deploy JS outside the browser
 - 2013, JSON is standardized and
 - 2012, TypeScript is created
+
+## AWS Servers
+Use this command to ssh into your server `ssh -i [path to key file] ubuntu@[ip address]`. The elastic ip address for the server is 44.207.233.9.
+
+Elastic IP addresses can be assigned using AWS to make sure that the server's IP address stays persistent throughout stops and starts of the server.
+
+YOu are charged different rates for using different technologies. The larger the instance, the more power, but also the more money you will spend.
