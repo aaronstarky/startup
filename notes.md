@@ -83,3 +83,32 @@ When working with domain names and IP addresses, especially through AWS, give ea
 
 To create a record that maps all URLs that go to this domain, use the star wildcard in the subdomains box.
 
+## Caddy
+**What is a caddyfile?** This is a configuration for your web service gateway. Editing this file changes the configuration for the web services that your linux server uses.
+
+### Functionalities
+- handles creation and rotation of [[web certificate]]s allowing us to support HTTPS
+- serves up all of your static HTML, CSS, and JavaScript files.
+
+### Important Files
+- Caddyfile - is the configuration for how Caddy does your routing. This shows where the static HTML webpages are loaded from and also proxies requests into the services that you create.
+- `~/public_html` is where all your static HTML files are stored that are then routed with Caddy. Any requests to get files from your server will look in this directory
+
+### Running caddy
+to Run caddy as a daemon, use command `caddy run`
+
+### More Info
+Caddy uses [[Let's Encrypt]] to generate a [[web certificate]] every time an HTTPS request is made that Caddy doesn't have a web certificate for. When this happens Caddy asks [[Let's Encrypt]] to verify that the domain for the requested certificate is actually owned by the requester. [[Let's Encrypt]] does that by telling the requester to return a specific digitally signed response for a temporary URL when an [[HTTP]] request to the domain is made. [[Let's Encrypt]] then makes the [[HTTP]] request, and if successful, issues the certificate to the requester.
+
+## HTTPS and TLS
+The TLS protocol ensures that all data being exchanged over an HTTP connection is secure by encrypting all of the data.
+
+TLS works by negotiating a shared secret that is then used to encrypt data.
+
+### Web Certificates
+files that authenticate a website's identity and enable and encrypted connections. They are issued by a trusted third party called a certificate authority.
+
+### Let's Encrypt
+A Mozilla created non-profit that broke the monopoly that certificate providers had on the market. This happened in 2014. God bless Mozilla.
+
+Pioneered the IETF Standard [[ACME Protocol]]
