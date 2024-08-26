@@ -100,6 +100,9 @@ to Run caddy as a daemon, use command `caddy run`
 ### More Info
 Caddy uses [[Let's Encrypt]] to generate a [[web certificate]] every time an HTTPS request is made that Caddy doesn't have a web certificate for. When this happens Caddy asks [[Let's Encrypt]] to verify that the domain for the requested certificate is actually owned by the requester. [[Let's Encrypt]] does that by telling the requester to return a specific digitally signed response for a temporary URL when an [[HTTP]] request to the domain is made. [[Let's Encrypt]] then makes the [[HTTP]] request, and if successful, issues the certificate to the requester.
 
+### Setting up Caddy to Allow HTTPS for your server
+Modify the Caddyfile so that the port number is replaced with your domain name and replace all instances of yourdomainnamehere with your actual domain name.
+
 ## HTTPS and TLS
 The TLS protocol ensures that all data being exchanged over an HTTP connection is secure by encrypting all of the data.
 
