@@ -1,5 +1,4 @@
-# Notes
-
+# Introduction
 ## GitHub
 ### Merge Conflicts
 Merge conflicts occur when the same line of code is edited in two different places and someone tries to pull those changes into their current branch. You can resolve this using the visual studio GUI tools and CLI tools.
@@ -140,3 +139,21 @@ Pioneered the IETF Standard ACME Protocol
 | `:w`      | write file (save)                                                                                                                              |
 | `:q`      | quit. Use `:q!` to exit without saving                                                                                                         |
 
+# HTML
+The entity character is the `&` and you can use it to escape commonly used symbols in HTML.
+
+## HTML Versions
+- 1990 - HTML1 - format tags
+- 1995 - HTML2 - tables, internationalization
+- 1997 - HTML3 - MathML, CSS, frame tags
+- 1999 - HTML4 - external CSS
+- 2014 - HTML5 - email, password, media, and semantic tags
+
+## index.html
+this is the default html doc that will be displayed by a web browser when a request is made without a specific file requested.
+
+## tags
+Here is an example of an `<img>` tag:
+```
+<img src="https://cms-z-assets.familysearch.org/53/20/3827b50548c7aa45405ce2d6bf21/tiny-world-large-resource.png">
+```
