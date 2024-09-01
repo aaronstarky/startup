@@ -57,13 +57,13 @@ Matches List View
 - [X] match setup
 	- [X] placeholder for list of friends / list of users
 	- [X] start button
-- [ ] match tracking
-	- [ ] placeholder for scores
-	- [ ] buttons for player1 and player2
-	- [ ] undo button
-	- [ ] exit button
-- [ ] match list
-	- [ ] placeholder for list of matches
+- [X] match tracking
+	- [X] placeholder for scores
+	- [X] buttons for player1 and player2
+	- [X] undo button
+	- [X] exit button
+- [X] match list
+	- [X] placeholder for list of matches
 
 ## CSS Deliverable
 - [ ] Add favicon.ico 
