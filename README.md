@@ -52,11 +52,11 @@ Matches List View
 ![matchList](MatchList.png)
 
 ## HTML Deliverable
-- [ ] add login html elements
-- [ ] add navigation for homepage --> match setup and homepage --> match list
-- [ ] match setup
-	- [ ] placeholder for list of friends / list of users
-	- [ ] start button
+- [X] add login html elements
+- [X] add navigation for homepage --> match setup and homepage --> match list
+- [X] match setup
+	- [X] placeholder for list of friends / list of users
+	- [X] start button
 - [ ] match tracking
 	- [ ] placeholder for scores
 	- [ ] buttons for player1 and player2
