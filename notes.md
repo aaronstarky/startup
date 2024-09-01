@@ -35,6 +35,9 @@ There are three main phases:
 - started with 18 tags and has grown to over 100 tags
 - controlled by W3C
 
+#### Things learned
+- `<h1>, <h2>, ...` tags have large spaces after them in documents.
+
 ### HTTP and URL
 - HTTP and URL define the way that documents are addressed and transferred over the internet
 
