@@ -4,18 +4,17 @@
 	    <meta charset="UTF-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	    <title>PaddleMatch - Dashboard</title>
+	    <link rel="stylesheet" href="../css/styles.css">
+        <title>PaddleMatch - Dashboard</title>
 	</head>
 	<body>
 		<header>
-            <img src="../PaddleMatchlogo.svg" alt="PaddleMatch Logo">
+            <img src="../PaddleMatchLogoWithText.svg" alt="PaddleMatch Logo">
             <h1>PaddleMatch</h1>
-            <a href="login.html">Logout</a>
+            <p class="username">[username] </p>
 		</header>
 		<main>
             <p>
-                Welcome [username] to PaddleMatch! 
-                PaddleMatch is an application designed to help you and your friends keep track of your pickleball matches.
                 To start tracking a match, click the link "Start Match!"
                 To view previously tracked matches, click the link "View Matches!"
             </p> 
@@ -25,16 +24,25 @@
                 This is a placeholder for a web service that will grab the most recent pickleball related headline off of Google
             </div>
 
+            <br>
+
             <nav>
-                <a href="match_setup.html">Start Match</a>
-                <br>
-                <a href="match_list.html">View Matches</a>
+                <div class="menuButton">
+                    <a class="buttonText" href="match_setup.html">
+                        START MATCH
+                    </a>
+                </div>
+                <div class="menuButton">
+                    <a class="buttonText" href="match_list.html" >VIEW MATCHES</a>
+                </div>
             </nav>
+            
 		</main>
 		<footer>
-            <h3>
-                <a href="https://github.com/aaronstarky/startup.git">Aaron Starkweather's GitHub</a>
-            </h3>
+            <div class="menuButtonAlt">
+                <a class="buttonText" href="login.html">LOGOUT</a>
+            </div>
+            <a class="footerlink" href="https://github.com/aaronstarky/startup.git">AARON STARKWEATHER GITHUB</a>
 		</footer>
 	</body>
 </html>

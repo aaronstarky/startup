@@ -5,60 +5,66 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	    <link rel="icon" type="image/icon" href="../favicon.ico">
+        <link rel="stylesheet" href="../css/styles.css">
+        <link rel="stylesheet" href="../css/matchListStyles.css">
         <title>PaddleMatch - Match List</title>
 	</head>
 	<body>
 		<header>
             <img src="../PaddleMatchlogo.svg" alt="PaddleMatch Logo">
             <h1>PaddleMatch</h1>
+            <nav>
+                <div class="menuButton">
+                    <a class="buttonText" href="match_setup.html">START A NEW MATCH</a>
+                </div>
+                <div class="menuButton">
+                    <a class="buttonText" href="index.html">HOMEPAGE</a>                    
+                </div>
+            </nav>
             <p>Matches for [username]</p>
 		</header>
 		<main>
-            <nav>
-                <a href="match_setup.html">Start a New Match</a>
-                <br>
-                <a href="index.html">Back</a>
-            </nav>
+            
 
             <h3>Placeholder for database data</h3>
             <ul>
                 <li>
-                    <div>
+                    <div class="matchListItem">
                         <p>
                             Today's Date
                         </p>
-                        <p>
+                        <div class="score">
                             Team 1 Score
-                        </p>
-                        <p>
+                        </div>
+                        <div class="score">
                             Team 2 Score
-                        </p>
+                        </div>
                     </div>
                 </li>
                 <li>
-                    <div>
+                    <div class="matchListItem">
                         <p>
                             Yesterday
                         </p>
-                        <p>
+                        <div class="score">
                             Team 1 Score
-                        </p>
-                        <p>
+                        </div>
+                        <div class="score">
                             Team 2 Score
-                        </p>
+                        </div>
                     </div>
                 </li>
                 <li>
-                    <div>
+                    <div class="matchListItem">
                         <p>
                             The Day Before Yesterday
                         </p>
-                        <p>
+                        <div class="score">
                             Team 1 Score
-                        </p>
-                        <p>
+                        </div>
+                        <div class="score">
                             Team 2 Score
-                        </p>
+                        </div>
                     </div>
                 </li>
                 

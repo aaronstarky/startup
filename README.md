@@ -52,6 +52,8 @@ Matches List View
 ![matchList](MatchList.png)
 
 ## HTML Deliverable
+With this deliverable, I added all the main webpages: login, index, match_list, match_setup, and match_track. I user proper HTML structure including proper use of `<nav>, <a>, <body>, <header>, <footer>, <main>` and other tags. Included within these webpages are placeholders web socket integration, database data, web-service data, and authentication.
+
 - [X] add login html elements
 - [X] add navigation for homepage --> match setup and homepage --> match list
 - [X] match setup
@@ -66,7 +68,7 @@ Matches List View
 	- [X] placeholder for list of matches
 
 ## CSS Deliverable
-- [ ] Add favicon.ico 
+- [X] Add favicon.ico 
 
 ## React Deliverable
 
