@@ -1,0 +1,67 @@
+* {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+.score {
+    font-size:x-large;
+    font-weight: 900;
+    color: #3972C3;
+}
+
+.menuButton {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-bottom: 10px;
+    margin-left: 40px;
+    margin-right: 40px;
+    background-color: #000000;
+    border-radius: 100px;
+    flex: 1;
+}
+
+.menuButtonAlt {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-bottom: 10px;
+    margin-left: 40px;
+    margin-right: 40px;
+    background-color: #858585;
+    border-radius: 100px;
+    flex: 1;
+}
+
+
+
+.buttonText {
+    color: white;
+    text-align: center;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+header, footer {
+    flex: 0 60px;
+}
+
+footerLink {
+    font-size: small;
+}
+
+main {
+    flex: 1;
+    flex-direction: row;
+}
+
+img {
+    width: min-content;
+}
