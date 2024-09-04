@@ -160,3 +160,60 @@ Here is an example of an `<img>` tag:
 ```
 <img src="https://cms-z-assets.familysearch.org/53/20/3827b50548c7aa45405ce2d6bf21/tiny-world-large-resource.png">
 ```
+
+# CSS
+## Selectors
+these select items in an html file and give them appearance properties.
+```
+p {
+	text-align: center;
+	color: red;
+}
+```
+This selector selects every `<p>` item in the html file and gives it the properties outlined.
+
+If two styles apply to the same [[HTML]] element, the style with a higher specificity will be applied to the object.
+
+### Types of selectors
+- universal (star) selector
+- id selector
+- class selector
+- grouping selector
+- type selector
+- combinator
+
+### Combinators
+Types: 
+- descendent = `tag tag`
+- child = `tag > tag` implies that any tag is a direct child of another section
+- general sibling = `div ~ p` any p that has a div sibling
+- adjacent sibling = `div + p` any p that has an adjacent div sibling
+
+#### Descendent combinator
+These allow us to change the styling for something like the following case: I want to change the style of headings but only when they are situated within a div.
+
+```
+div h2 {
+	...
+}
+```
+
+### Class selector
+Select all items of a class: `.className`
+
+Select all p items of a particular class: `p.className`
+
+### ID Selector
+Select item with ID: `#myID`
+
+### Attribute selector
+Select all p with attribute: `p[class='summary']`
+
+### Pseudo Selector
+Pseudo selectors are used to select items in HTML based on mouse clicks, hovering, positional relationships and other things. You use them by specifying a selector and then using a `:` next to it with the pseudo selector following it.
+
+```
+section:hover {
+	...
+}
+```
