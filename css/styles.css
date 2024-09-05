@@ -9,6 +9,45 @@
     color: #3972C3;
 }
 
+
+.buttonText {
+    color: white;
+    text-align: center;
+}
+
+/* Header Styling */ 
+header {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+
+.service-info {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+.nav-buttons, .service-name {
+    text-align: left;
+    
+}
+
+.header-link {
+    padding-right: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.header-link:hover {
+    color: orange;
+}
+
+main {
+    flex: 1;
+    flex-direction: column;
+}
+
+/* These are some fun pieces of CSS for some rounded black buttons */
 .menuButton {
     text-align: center;
     padding-top: 20px;
@@ -35,33 +74,4 @@
     background-color: #858585;
     border-radius: 100px;
     flex: 1;
-}
-
-
-
-.buttonText {
-    color: white;
-    text-align: center;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-}
-
-header, footer {
-    flex: 0 60px;
-}
-
-footerLink {
-    font-size: small;
-}
-
-main {
-    flex: 1;
-    flex-direction: row;
-}
-
-img {
-    width: min-content;
 }
