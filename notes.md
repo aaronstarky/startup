@@ -217,3 +217,43 @@ section:hover {
 	...
 }
 ```
+
+## Responsive Design
+Makes use of the viewport meta tag and ideas like [[CSS Flex]]. This way, the webpage will always look good no matter what display it is on.
+
+### display
+This property allows you to decide how an [[HTML]] element is displayed by the browser, enabling some cool behavior.
+
+| Value  | Meaning                                                                                                                      |
+| ------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| none   | Don't display this element. The element still exists, but the browser will not render it.                                    |
+| block  | Display this element with a width that fills its parent element. A `p` or `div` element has block display by default.        |
+| inline | Display this element with a width that is only as big as its content. A `b` or `span` element has inline display by default. |
+| flex   | Display this element's children in a flexible orientation.                                                                   |
+| grid   | Display this element's children in a grid orientation.                                                                       |
+
+#### grid
+to specify the number of columns that your grid layout will have, add numerical declarations after
+`grid-template-columns: 1fr` makes one column, 
+`grid-template-columns: 1fr 1fr` makes two columns
+`grid-template-columns: 1fr 1fr 1fr` makes three columns 
+
+#### float property
+allows things to wrap around it and for the box to gravitate towards one side of the page.
+
+### viewport tag
+Include this in the head element of your [[HTML]] page:
+```html
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+```
+
+### Media Query
+uses the `@` symbol to do certain things based on certain conditions. For example if we want the menu to drop when the viewport is small, we can make a media query to handle that.
+
+```css
+@media (orientation: portrait) {
+  aside {
+    display: none;
+  }
+}
+```
