@@ -54,9 +54,10 @@ Matches List View
 ## HTML Deliverable
 With this deliverable, I added all the main webpages: login, index, match_list, match_setup, and match_track. I user proper HTML structure including proper use of `<nav>, <a>, <body>, <header>, <footer>, <main>` and other tags. Included within these webpages are placeholders web socket integration, database data, web-service data, and authentication.
 
-- [X] add login html elements
+- [X] add login html elements (authentication)
 - [X] add navigation for homepage --> match setup and homepage --> match list
-- [X] match setup
+- [X] add web service placeholder for homepage to get pickleball headlines from google
+- [X] match setup (web socket integration for live invites)
 	- [X] placeholder for list of friends / list of users
 	- [X] start button
 - [X] match tracking
@@ -64,7 +65,7 @@ With this deliverable, I added all the main webpages: login, index, match_list, 
 	- [X] buttons for player1 and player2
 	- [X] undo button
 	- [X] exit button
-- [X] match list
+- [X] match list (database data)
 	- [X] placeholder for list of matches
 
 ## CSS Deliverable
