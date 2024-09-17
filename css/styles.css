@@ -17,7 +17,10 @@
 /* Header Styling */ 
 header {
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 1fr 10fr;
+    background-color: rgb(139, 139, 139);
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .service-info {
@@ -30,15 +33,47 @@ header {
     
 }
 
+.service-name {
+    color: #3972C3;
+}
+
+.nav-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: left;
+}
+
+#app-logo {
+    max-width: 75%;
+    max-height: max-content;
+    height: auto;
+}
+
+#logo {
+    align-items: center;
+}
+
 .header-link {
-    padding-right: 10px;
+    padding-right: 30px;
     font-size: 16px;
     cursor: pointer;
     text-decoration: none;
 }
 
 .header-link:hover {
-    color: orange;
+    animation: pulse_colors infinite 2s;
+}
+
+@keyframes pulse_colors {
+    0% {
+        color: white;
+    }
+    40% {
+        color: #3972C3;
+    }
+    100% {
+        color: white;
+    }
 }
 
 main {
@@ -46,31 +81,10 @@ main {
     flex-direction: column;
 }
 
-/* These are some fun pieces of CSS for some rounded black buttons */
-.menuButton {
-    text-align: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 40px;
-    padding-right: 40px;
-    margin-bottom: 10px;
-    margin-left: 40px;
-    margin-right: 40px;
-    background-color: #000000;
-    border-radius: 100px;
-    flex: 1;
-}
-
-.menuButtonAlt {
-    text-align: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 40px;
-    padding-right: 40px;
-    margin-bottom: 10px;
-    margin-left: 40px;
-    margin-right: 40px;
-    background-color: #858585;
-    border-radius: 100px;
-    flex: 1;
-}
+/* TODO: style the footer */
+/* TODO: style the main content body */
+/* TODO: style the navigation elements */
+/* TODO: make buttons responsive to window resizing */
+/* TODO: properly style application text content */
+/* TODO: properly style application images */
+/* TODO: properly style the application content */
