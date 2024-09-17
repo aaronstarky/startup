@@ -1,6 +1,6 @@
 * {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    text-align: center;
+    text-align: left;
 }
 
 .score {
@@ -11,17 +11,9 @@
 
 .buttonText {
     color: white;
-    text-align: center;
+    text-align: left;
 }
 
-/* Header Styling */ 
-header {
-    display: grid;
-    grid-template-columns: 1fr 10fr;
-    background-color: rgb(139, 139, 139);
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
 
 .service-info {
     display: grid;
@@ -30,7 +22,6 @@ header {
 
 .nav-buttons, .service-name {
     text-align: left;
-    
 }
 
 .service-name {
@@ -58,6 +49,7 @@ header {
     font-size: 16px;
     cursor: pointer;
     text-decoration: none;
+    color:#3972C3
 }
 
 .header-link:hover {
@@ -81,8 +73,33 @@ main {
     flex-direction: column;
 }
 
+/* Header Styling */ 
+header {
+    display: grid;
+    grid-template-columns: 1fr 10fr;
+    background-color: rgb(68, 68, 68);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
 /* TODO: style the footer */
+
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    background-color: rgb(68, 68, 68);
+    padding: 20px 20px;
+}
+
 /* TODO: style the main content body */
+main {
+    background-color: rgb(30, 40, 72);
+    color: white;
+    padding: 20px 20px;
+}
+
 /* TODO: style the navigation elements */
 /* TODO: make buttons responsive to window resizing */
 /* TODO: properly style application text content */
