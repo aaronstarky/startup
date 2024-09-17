@@ -77,12 +77,6 @@ main {
 /* TODO: properly style application images */
 /* TODO: properly style the application content */
 
-.score {
-    font-size:x-large;
-    font-weight: 900;
-    color: #3972C3;
-}
-
 .buttonText {
     color: white;
     text-align: left;
