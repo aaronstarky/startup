@@ -3,6 +3,74 @@
     text-align: left;
 }
 
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    min-height: 100%;
+    width: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+
+main {
+    flex: 1;
+    flex-direction: column;
+}
+
+header, footer, main {
+    width: 100%;
+}
+
+/* Header Styling */ 
+header {
+    flex: none;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    background-color: rgb(68, 68, 68);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+/* TODO: style the footer */
+
+footer {
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    justify-content: left;
+    background-color: rgb(68, 68, 68);
+    padding: 20px 20px;
+    position: fixed;
+    bottom: 0;
+}
+
+@media (max-width: 767px) {
+    .footer {
+      display: none;
+    }
+  }
+
+/* TODO: style the main content body */
+main {
+    background-color: rgb(30, 40, 72);
+    color: white;
+    padding: 20px 20px;
+    min-height: 100%;
+    flex: auto;
+}
+
+/* TODO: style the navigation elements */
+/* TODO: make buttons responsive to window resizing */
+/* TODO: properly style application text content */
+/* TODO: properly style application images */
+/* TODO: properly style the application content */
+
 .score {
     font-size:x-large;
     font-weight: 900;
@@ -13,7 +81,6 @@
     color: white;
     text-align: left;
 }
-
 
 .service-info {
     display: grid;
@@ -41,7 +108,8 @@
 }
 
 #logo {
-    align-items: center;
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 .header-link {
@@ -67,41 +135,3 @@
         color: white;
     }
 }
-
-main {
-    flex: 1;
-    flex-direction: column;
-}
-
-/* Header Styling */ 
-header {
-    display: grid;
-    grid-template-columns: 1fr 10fr;
-    background-color: rgb(68, 68, 68);
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-
-/* TODO: style the footer */
-
-footer {
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    background-color: rgb(68, 68, 68);
-    padding: 20px 20px;
-}
-
-/* TODO: style the main content body */
-main {
-    background-color: rgb(30, 40, 72);
-    color: white;
-    padding: 20px 20px;
-}
-
-/* TODO: style the navigation elements */
-/* TODO: make buttons responsive to window resizing */
-/* TODO: properly style application text content */
-/* TODO: properly style application images */
-/* TODO: properly style the application content */
