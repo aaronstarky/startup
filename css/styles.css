@@ -48,9 +48,7 @@ footer {
     flex-direction: column;
     justify-content: left;
     background-color: rgb(68, 68, 68);
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-bottom: 20px;
+    padding: 20px 20px 20px;
     position: fixed;
     bottom: 0;
 }
@@ -67,15 +65,10 @@ main {
     color: white;
     padding-top: 20px;
     padding-left: 20px;
-    min-height: 100%;
+    padding-bottom: 100px;
+    min-height: fit-content;
     flex: auto;
 }
-
-/* TODO: style the navigation elements */
-/* TODO: make buttons responsive to window resizing */
-/* TODO: properly style application text content */
-/* TODO: properly style application images */
-/* TODO: properly style the application content */
 
 .buttonText {
     color: white;
@@ -148,4 +141,24 @@ main {
     padding-left: 20px;
     padding-bottom: 20px;
     max-width: 90%;
+}
+
+.auth-box {
+    background-color: rgb(120, 120, 120);
+    border-radius: 5px;
+    margin: 20px 20px 20px;
+    padding: 20px 20px;
+    width: max-content;
+    display: grid;
+}
+
+#userlabel, #passlabel {
+    color: white;
+    grid-column-start: 1;
+    grid-column-end: 1;
+}
+
+.auth-box input {
+    grid-column-start: 2;
+    grid-column-end: 3;
 }

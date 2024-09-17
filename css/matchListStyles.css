@@ -1,0 +1,29 @@
+.match-list {
+    display: flex;
+    overflow: auto;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.match-list-item {
+    background-color: rgb(68, 68,68);
+    color: #3972C3;
+    border-radius: 5px;
+    padding: 10px 20px;
+    display: grid;
+}
+
+.match-list-item p {
+    color: white;
+    grid-column-start: 1;
+    grid-row: 1;
+}
+
+.score {
+    font-size: xxx-large;
+    grid-row: 2;
+}
+
+.player-list {
+    grid-row: 3;
+}

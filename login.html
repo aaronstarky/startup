@@ -12,7 +12,7 @@
 		<header>
 
             <div id="logo">
-                <img src="PaddleMatchLogo.svg" alt="PaddleMatch Logo">
+                <img id="app-logo" src="PaddleMatchLogo.svg" alt="PaddleMatch Logo">
             </div>
             <div id="service-info">
                 <h1 class="service-name">PaddleMatch</h1>
@@ -32,18 +32,23 @@
         </header>
 
 		<main>
-            <h3>Placeholder for Login Components</h3>
-            <label for="username">Username:</label>
-            <input type="text" name="username" id="username">
-            <br>
-            <label for="password">Password:</label>
-            <input type="text" name="password" id="password">
-            <br>
-            <a href="index.html">Login</a>
+            <div class="auth-box">
+                <h3>Login</h3>
+                <div id="login-form">
+                    <label id="userlabel" for="username">Username:</label>
+                    <input type="text" name="username" id="username">
+                    <br>
+                    <label id="passlabel" for="password">Password:</label>
+                    <input type="text" name="password" id="password">
+                </div>
+                <br>
+                <a class="header-link" href="index.html">Login</a>
+            </div>
+            
 		</main>
 
 		<footer>
-            <a href="https://github.com/aaronstarky/startup.git">AARON STARKWEATHER'S GITHUB</a>
+            <a class="header-link" href="https://github.com/aaronstarky/startup.git">AARON STARKWEATHER'S GITHUB</a>
 		</footer>
 	</body>
 </html>
