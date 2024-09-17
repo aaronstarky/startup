@@ -70,6 +70,14 @@ With this deliverable, I added all the main webpages: login, index, match_list, 
 
 ## CSS Deliverable
 - [X] Add favicon.ico 
+- [X] create grid layout header with navigation components to get to main aspects of the page
+- [X] style hyperlinks
+- [ ] App logo sizes dynamically with the screen 
+- [ ] match screen
+	- [ ] flex layout
+	- [ ] scores are displayed on buttons when viewport is small
+	- [ ] expanded view when viewport is large
+- [ ] match list items styled like cards
 
 ## React Deliverable
 
