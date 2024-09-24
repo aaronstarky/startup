@@ -10,8 +10,8 @@
 
 	</head>
 	<body>
+        
 		<header>
-
             <div id="logo">
                 <img id="app-logo" src="PaddleMatchLogo.svg" alt="PaddleMatch Logo">
             </div>
@@ -28,21 +28,20 @@
                         LOGIN
                     </a>
                 </nav>
-            </div> 
-                       
+            </div>      
         </header>
 		<main>
 
             <!-- Score Keeping is done here-->
             <div id="scoringArea">
-                <div class="score" id="team1">
+                <div class="score" id="team1Score">
                     0
                 </div>
                 <div class="subtext">
                     VS
                 </div>
                     
-                <div class="score" id="team2">
+                <div class="score" id="team2Score">
                     0
                 </div>
             </div>
@@ -51,6 +50,7 @@
                 <button class="scoring-button" id="undo" name="undo">UNDO</button>
                 <button class="scoring-button" id="team2Button" name="team2Button">TEAM 2</button>
             </div>
+            <script src="js/matchTrack.js"></script>
 		</main>
 		<footer>
             <a class="header-link" href="https://github.com/aaronstarky/startup.git">AARON STARKWEATHER'S GITHUB</a>

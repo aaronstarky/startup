@@ -49,8 +49,6 @@ footer {
     justify-content: left;
     background-color: rgb(68, 68, 68);
     padding: 20px 20px 20px;
-    position: fixed;
-    bottom: 0;
 }
 
 @media (max-width: 767px) {

@@ -24,36 +24,28 @@
     justify-content: center;
     align-items: center;
     margin-top: 20px;
-    height: 25%;
+    height: 100%;
     min-width: fit-content
 }
+
 .scoring-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 10px 10px;
     height: 100%;
     text-align: center;
+    border-radius: 20px;
+    border-style: none;
+    min-width: fit-content;
+    width: 30%;
+    background-color:rgb(9, 9, 9);
 }
 
 #undo {
-    width: fit-content;
-    height: 50%;
-    background-color: #E48B00;
-
+    width: 30%;
+    height: 100%;
+    background-color: #666;
+    border-style: none;
+    border-width: 2px;
 }
-
-@media (max-width: 600px) {
-    #buttons {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    #scoring-button {
-        margin-bottom: 10px;
-        width: 30%;
-    }
-
-    #undo {
-        width: 15%;
-    }
-}
-
-
