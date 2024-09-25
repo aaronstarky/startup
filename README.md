@@ -75,8 +75,8 @@ With this deliverable, I added all the main webpages: login, index, match_list, 
 - [ ] App logo sizes dynamically with the screen 
 - [ ] match screen
 	- [X] flex layout
-	- [ ] scores are displayed on buttons when viewport is small
-	- [ ] expanded view when viewport is large
+	- [X] scores are displayed on buttons when viewport is small
+	- [X] expanded view when viewport is large
 - [ ] match list items styled like cards
 
 ## React Deliverable

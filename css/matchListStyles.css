@@ -1,29 +1,35 @@
 .match-list {
     display: flex;
+    flex-wrap: wrap;
     overflow: auto;
-    flex-direction: column;
-    gap: 20px;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.date {
+    color: grey;
 }
 
 .match-list-item {
+    display: flex;
+    flex-direction: column;
     background-color: rgb(68, 68,68);
-    color: #3972C3;
-    border-radius: 5px;
+    border-radius: 20px;
     padding: 10px 20px;
-    display: grid;
+    min-width: 300px;
+    max-width: 400px;
+    
+    min-height: 150px;
+    max-height: 200px;
 }
 
-.match-list-item p {
-    color: white;
-    grid-column-start: 1;
-    grid-row: 1;
+.scoring-summary {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .score {
-    font-size: xxx-large;
-    grid-row: 2;
-}
-
-.player-list {
-    grid-row: 3;
+    font-size: 5em;
 }
