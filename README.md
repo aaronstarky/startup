@@ -74,7 +74,7 @@ With this deliverable, I added all the main webpages: login, index, match_list, 
 - [X] style hyperlinks
 - [ ] App logo sizes dynamically with the screen 
 - [ ] match screen
-	- [ ] flex layout
+	- [X] flex layout
 	- [ ] scores are displayed on buttons when viewport is small
 	- [ ] expanded view when viewport is large
 - [ ] match list items styled like cards

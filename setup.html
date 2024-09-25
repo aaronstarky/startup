@@ -4,13 +4,11 @@
 	    <meta charset="UTF-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	    <title>PaddleMatch - Track Match</title>
+	    <title>PaddleMatch - Setup Match</title>
         <link rel="stylesheet" href="../css/styles.css">
-        <link rel="stylesheet" href="../css/matchTrackStyles.css">
 
 	</head>
 	<body>
-        
 		<header>
             <div id="logo">
                 <img id="app-logo" src="PaddleMatchLogo.svg" alt="PaddleMatch Logo">
@@ -18,39 +16,38 @@
             <div id="service-info">
                 <h1 class="service-name">PaddleMatch</h1>
                 <nav class="nav-buttons">
-                    <a class="header-link" id="start-match-button" href="match_setup.html">
+                    <a class="header-link" id="start-match-button" href="setup.html">
                         START MATCH
                     </a>
-                    <a class="header-link" id="view-matches-button" href="match_list.html">
+                    <a class="header-link" id="view-matches-button" href="matches.html">
                         VIEW MATCHES
                     </a>
                     <a class="header-link" id="logout-button" href="login.html">
                         LOGIN
                     </a>
                 </nav>
-            </div>      
+            </div>         
         </header>
 		<main>
+            <h3>
+                <div class="interactive-button">
+                    <a class="header-link" href="track.html">BEGIN MATCH</a>
+                </div>
+            </h3>
 
-            <!-- Score Keeping is done here-->
-            <div id="scoringArea">
-                <div class="score" id="team1Score">
-                    0
-                </div>
-                <div class="subtext">
-                    VS
-                </div>
-                    
-                <div class="score" id="team2Score">
-                    0
+            <p>Invite friends in real-time to your game by searching for their usernames and clicking "Invite"</p>
+
+            <!-- Websocket communication will allow users to invite others to matches in real-time -->  
+            <div class="player-search-box">
+                <h3>Placeholder for WebSocket Communication</h3>
+                <ul id="players">
+                </ul>
+                <div>
+                    <label for="playerSearch">Player ID:</label>
+                    <input type="text" name="playerSearch" id="playerSearch">
                 </div>
             </div>
-            <div id="buttons">
-                <button class="scoring-button" id="team1Button" name="team1Button">TEAM 1</button>
-                <button class="scoring-button" id="undo" name="undo">UNDO</button>
-                <button class="scoring-button" id="team2Button" name="team2Button">TEAM 2</button>
-            </div>
-            <script src="js/matchTrack.js"></script>
+            
 		</main>
 		<footer>
             <a class="header-link" href="https://github.com/aaronstarky/startup.git">AARON STARKWEATHER'S GITHUB</a>

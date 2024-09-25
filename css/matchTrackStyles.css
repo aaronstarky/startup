@@ -1,51 +1,34 @@
-#scoringArea {
+
+#scoring-area {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items:center;
-    margin-top: 20px;
+    align-items: center;
+    flex: auto;
+}
+
+.score-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px;
+    margin: 20px 20px;
+    border-radius: 20px;
+    border-style: none;
+    min-width: 150px;
+    /* max-width: 300px; */
+    min-height: 150px;
+    
+    background-color:rgb(9, 9, 9);
+    color: white;
+}
+
+.score-button.setting {
+    justify-content: center;
 }
 
 .score {
-    font-size:xxx-large;
-    font-weight: 900;
-    color: rgb(255, 255, 255);
-    padding: 0px 10px;
-}
-
-.subtext {
-    color: rgb(120, 120, 120);
-}
-
-#buttons {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-    height: 100%;
-    min-width: fit-content
-}
-
-.scoring-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 10px;
-    height: 100%;
-    text-align: center;
-    border-radius: 20px;
-    border-style: none;
-    min-width: fit-content;
-    width: 30%;
-    background-color:rgb(9, 9, 9);
-}
-
-#undo {
-    width: 30%;
-    height: 100%;
-    background-color: #666;
-    border-style: none;
-    border-width: 2px;
-}
+    font-size: xxx-large;
+    font-weight: bold;
+} 

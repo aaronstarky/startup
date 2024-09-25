@@ -4,13 +4,13 @@
 	    <meta charset="UTF-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	    <title>PaddleMatch - Login</title>
-		<link rel="stylesheet" href="css/styles.css">
+	    <title>PaddleMatch - Track Match</title>
+        <link rel="stylesheet" href="../css/styles.css">
+        <link rel="stylesheet" href="../css/matchTrackStyles.css">
 
 	</head>
 	<body>
 		<header>
-
             <div id="logo">
                 <img id="app-logo" src="PaddleMatchLogo.svg" alt="PaddleMatch Logo">
             </div>
@@ -27,26 +27,36 @@
                         LOGIN
                     </a>
                 </nav>
-            </div> 
-                       
+            </div>      
         </header>
-
 		<main>
-            <div class="auth-box">
-                <h3>Login</h3>
-                <div id="login-form">
-                    <label id="userlabel" for="username">Username:</label>
-                    <input type="text" name="username" id="username">
-                    <br>
-                    <label id="passlabel" for="password">Password:</label>
-                    <input type="text" name="password" id="password">
-                </div>
-                <br>
-                <a class="header-link" href="index.html">Login</a>
-            </div>
-            
-		</main>
 
+            <!-- Score Keeping is done here-->
+            <div id="scoring-area">
+                <div class="score-button" id="team1">
+                    <div class="score" id="team1Score">
+                        0
+                    </div>
+                    <div class="team-name" id="team1Name">
+                        TEAM 1
+                    </div>
+                </div>
+                <div class="score-button" id="team2">
+                    <div class="score" id="team2Score">
+                        0
+                    </div>
+                    <div class="team-name" id="team2Name">
+                        TEAM 2
+                    </div>
+                </div>
+                <div class="score-button setting" id="team2">
+                    <div>
+                        Undo
+                    </div>
+                </div>
+            </div>
+            <script src="js/matchTrack.js"></script>
+		</main>
 		<footer>
             <a class="header-link" href="https://github.com/aaronstarky/startup.git">AARON STARKWEATHER'S GITHUB</a>
 		</footer>

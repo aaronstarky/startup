@@ -24,19 +24,13 @@ main {
     flex-direction: column;
 }
 
-header, footer, main {
-    width: 100%;
-}
-
 /* Header Styling */ 
 header {
     flex: none;
     display: grid;
     grid-template-columns: 1fr 4fr;
     background-color: rgb(68, 68, 68);
-    padding-top: 10px;
-    padding-left: 20px;
-    padding-bottom: 10px;
+    padding: 10px 10px
 }
 
 
@@ -48,7 +42,7 @@ footer {
     flex-direction: column;
     justify-content: left;
     background-color: rgb(68, 68, 68);
-    padding: 20px 20px 20px;
+    padding: 10px 10px;
 }
 
 @media (max-width: 767px) {
