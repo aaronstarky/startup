@@ -312,3 +312,16 @@ uses the `@` symbol to do certain things based on certain conditions. For exampl
 - This API is also used as a cache for when data cannot be obtained from the server.
 - local storage values must be strings, numbers or booleans, Objects must be converted to [[JSON]] strings before being stored.
 - Below are the primary methods for setting and retrieving information
+
+## [[JavaScript Promise]] 
+A promise is always in one of three states:
+1. pending
+2. fulfilled
+3. rejected
+
+Creating a promise takes two functions as parameters.
+
+### Then, catch, finally
+- `finally` is the last thing to be done in the callback chain
+- `then` is the next progressive step in the callback chain
+- `catch` is the error handling function of the callback chain.
