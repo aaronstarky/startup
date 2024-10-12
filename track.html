@@ -1,64 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-	    <meta charset="UTF-8">
-	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	    <title>PaddleMatch - Track Match</title>
-        <link rel="stylesheet" href="../css/styles.css">
-        <link rel="stylesheet" href="../css/track-styles.css">
 
-	</head>
-	<body>
-		<header>
-            <div id="logo">
-                <img id="app-logo" src="PaddleMatchLogo.svg" alt="PaddleMatch Logo">
-            </div>
-            <div id="service-info">
-                <h1 class="service-name">PaddleMatch</h1>
-                <nav class="nav-buttons">
-                    <a class="header-link" id="start-match-button" href="setup.html">
-                        START MATCH
-                    </a>
-                    <a class="header-link" id="view-matches-button" href="matches.html">
-                        VIEW MATCHES
-                    </a>
-                    <a class="header-link" id="logout-button" href="login.html">
-                        LOGIN
-                    </a>
-                </nav>
-            </div>      
-        </header>
-		<main>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PaddleMatch - Track Match</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/track-styles.css">
 
-            <!-- Score Keeping is done here-->
-            <div id="scoring-area">
-                <div class="score-button" id="team1">
-                    <div class="score" id="team1Score">
-                        0
-                    </div>
-                    <div class="team-name" id="team1Name">
-                        Team 1
-                    </div>
+</head>
+
+<body>
+    <header>
+        <img id="app-logo" src="PaddleMatchLogo.svg" alt="PaddleMatch Logo">
+        <div id="service-info">
+            <h1 class="service-name">PaddleMatch</h1>
+            <nav class="nav-buttons">
+                <a class="header-link" id="start-match-button" href="setup.html">
+                    START MATCH
+                </a>
+                <a class="header-link" id="view-matches-button" href="matches.html">
+                    VIEW MATCHES
+                </a>
+                <a class="header-link" id="logout-button" href="login.html">
+                    LOGIN
+                </a>
+            </nav>
+        </div>
+    </header>
+    <main>
+
+        <!-- Score Keeping is done here-->
+        <div id="scoring-area">
+            <div class="score-button" id="team1">
+                <div class="score" id="team1Score">
+                    0
                 </div>
-                <div class="score-button" id="team2">
-                    <div class="score" id="team2Score">
-                        0
-                    </div>
-                    <div class="team-name" id="team2Name">
-                        Team 2
-                    </div>
-                </div>
-                <div class="score-button setting" id="team2">
-                    <div>
-                        Undo
-                    </div>
+                <div class="team-name" id="team1Name">
+                    Team 1
                 </div>
             </div>
-            <script src="js/matchTrack.js"></script>
-		</main>
-		<footer>
-            <a class="header-link" href="https://github.com/aaronstarky/startup.git">AARON STARKWEATHER'S GITHUB</a>
-		</footer>
-	</body>
+            <div class="score-button" id="team2">
+                <div class="score" id="team2Score">
+                    0
+                </div>
+                <div class="team-name" id="team2Name">
+                    Team 2
+                </div>
+            </div>
+            <div class="score-button setting" id="team2">
+                <div>
+                    Undo
+                </div>
+            </div>
+        </div>
+        <script src="js/matchTrack.js"></script>
+    </main>
+    <footer>
+        <a class="header-link" href="https://github.com/aaronstarky/startup.git">AARON STARKWEATHER'S GITHUB</a>
+    </footer>
+</body>
+
 </html>

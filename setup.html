@@ -1,56 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-	    <meta charset="UTF-8">
-	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	    <title>PaddleMatch - Setup Match</title>
-        <link rel="stylesheet" href="../css/styles.css">
 
-	</head>
-	<body>
-		<header>
-            <div id="logo">
-                <img id="app-logo" src="PaddleMatchLogo.svg" alt="PaddleMatch Logo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PaddleMatch - Setup Match</title>
+    <link rel="stylesheet" href="../css/styles.css">
+
+</head>
+
+<body>
+    <header>
+        <img id="app-logo" src="PaddleMatchLogo.svg" alt="PaddleMatch Logo">
+        <div id="service-info">
+            <h1 class="service-name">PaddleMatch</h1>
+            <nav class="nav-buttons">
+                <a class="header-link" id="start-match-button" href="setup.html">
+                    START MATCH
+                </a>
+                <a class="header-link" id="view-matches-button" href="matches.html">
+                    VIEW MATCHES
+                </a>
+                <a class="header-link" id="logout-button" href="login.html">
+                    LOGIN
+                </a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <h3>
+            <div class="interactive-button">
+                <a class="header-link" href="track.html">BEGIN MATCH</a>
             </div>
-            <div id="service-info">
-                <h1 class="service-name">PaddleMatch</h1>
-                <nav class="nav-buttons">
-                    <a class="header-link" id="start-match-button" href="setup.html">
-                        START MATCH
-                    </a>
-                    <a class="header-link" id="view-matches-button" href="matches.html">
-                        VIEW MATCHES
-                    </a>
-                    <a class="header-link" id="logout-button" href="login.html">
-                        LOGIN
-                    </a>
-                </nav>
-            </div>         
-        </header>
-		<main>
-            <h3>
-                <div class="interactive-button">
-                    <a class="header-link" href="track.html">BEGIN MATCH</a>
-                </div>
-            </h3>
+        </h3>
 
-            <p>Invite friends in real-time to your game by searching for their usernames and clicking "Invite"</p>
+        <p>Invite friends in real-time to your game by searching for their usernames and clicking "Invite"</p>
 
-            <!-- Websocket communication will allow users to invite others to matches in real-time -->  
-            <div class="player-search-box">
-                <h3>Placeholder for WebSocket Communication</h3>
-                <ul id="players">
-                </ul>
-                <div>
-                    <label for="playerSearch">Player ID:</label>
-                    <input type="text" name="playerSearch" id="playerSearch">
-                </div>
+        <!-- Websocket communication will allow users to invite others to matches in real-time -->
+        <div class="player-search-box">
+            <h3>Placeholder for WebSocket Communication</h3>
+            <ul id="players">
+            </ul>
+            <div>
+                <label for="playerSearch">Player ID:</label>
+                <input type="text" name="playerSearch" id="playerSearch">
             </div>
-            
-		</main>
-		<footer>
-            <a class="header-link" href="https://github.com/aaronstarky/startup.git">AARON STARKWEATHER'S GITHUB</a>
-		</footer>
-	</body>
+        </div>
+
+    </main>
+    <footer>
+        <a class="header-link" href="https://github.com/aaronstarky/startup.git">AARON STARKWEATHER'S GITHUB</a>
+    </footer>
+</body>
+
 </html>

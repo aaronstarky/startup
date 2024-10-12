@@ -26,15 +26,17 @@ main {
 
 /* Header Styling */ 
 header {
-    flex: none;
-    display: grid;
-    grid-template-columns: 1fr 4fr;
+    display: flex;
+    gap: 10px;
     background-color: rgb(68, 68, 68);
-    padding: 10px 10px
+    justify-content: left;
+    align-items: center;
 }
 
-
-/* TODO: style the footer */
+header img {
+    max-width: 100px;
+    max-height: 100px;
+}
 
 footer {
     display: flex;
@@ -44,12 +46,6 @@ footer {
     background-color: rgb(68, 68, 68);
     padding: 10px 10px;
 }
-
-@media (max-width: 767px) {
-    .footer {
-      display: none;
-    }
-  }
 
 /* TODO: style the main content body */
 main {
@@ -84,17 +80,6 @@ main {
     display: flex;
     flex-wrap: wrap;
     text-align: left;
-}
-
-#app-logo {
-    max-width: 75%;
-    max-height: max-content;
-    height: auto;
-}
-
-#logo {
-    padding-left: 10%;
-    padding-right: 10%;
 }
 
 .header-link {
