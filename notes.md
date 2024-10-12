@@ -152,16 +152,23 @@ The entity character is the `&` and you can use it to escape commonly used symbo
 this is the default html doc that will be displayed by a web browser when a request is made without a specific file requested.
 
 ## tags
+
 Here is an example of an `<img>` tag:
 
 ```
+
 <img src="https://cms-z-assets.familysearch.org/53/20/3827b50548c7aa45405ce2d6bf21/tiny-world-large-resource.png">
+
 ```
 
+  
+
 # CSS
+
 ## Selectors
 these select items in an html file and give them appearance properties.
 ```
+
 p {
 
   text-align: center;
@@ -169,6 +176,7 @@ p {
   color: red;
 
 }
+
 ```
 This selector selects every `<p>` item in the html file and gives it the properties outlined.
 
@@ -192,12 +200,16 @@ Types:
 #### Descendent combinator
 These allow us to change the styling for something like the following case: I want to change the style of headings but only when they are situated within a div.
 ```
+
 div h2 {
 
   ...
 
 }
+
 ```
+
+  
 
 ### Class selector
 Select all items of a class: `.className`
@@ -294,3 +306,9 @@ uses the `@` symbol to do certain things based on certain conditions. For exampl
 | Keyboard       | keys are pressed      |
 | Mouse          | click events          |
 | Text Selection | when text is selected |
+
+## Local Storage in [[JavaScript]]
+- You can use the `localStorage` API to persistently share and retrieve data on a users browser across user sessions and [[HTML]] page renderings.
+- This API is also used as a cache for when data cannot be obtained from the server.
+- local storage values must be strings, numbers or booleans, Objects must be converted to [[JSON]] strings before being stored.
+- Below are the primary methods for setting and retrieving information
