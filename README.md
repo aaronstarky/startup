@@ -69,6 +69,8 @@ With this deliverable, I added all the main webpages: login, index, match_list, 
 	- [X] placeholder for list of matches
 
 ## CSS Deliverable
+With this deliverable, I added styling to the header and footer. I also added styling to each of the application screens so that the match list items look like cards and dynamically change arrangement based on screen size. For the match tracking page, I make another flex layout to fit screen sizes. I also added some fun animations to the navigation links at the top. Overall, the appearance of the application is far better than it was at the beginning.
+
 - [X] Add favicon.ico 
 - [X] create grid layout header with navigation components to get to main aspects of the page
 - [X] style hyperlinks
