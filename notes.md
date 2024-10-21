@@ -297,8 +297,29 @@ uses the `@` symbol to do certain things based on certain conditions. For exampl
 - `innerHTML` allows you to inject [[HTML]] into the DOM objects you create.
 	- this is a common attack method for hackers
 	- to protect against this:
-		- santize all HTML that contains variables
+		- sanitize all [[HTML]] that contains variables
 		- use DOM manipulation functions instead of using `innerHTML`
+- The `map` function behaves like a linear transformation in MATH 413. The map function creates a new array from an existing one by specifying a function by which to transform the elements in the array.
+
+## functions
+functions can be strict or non-strict. strict functions only have simple parameters
+### parameters
+- simple parameters are those that are not **rest**, **default**, or **destructured** parameters.
+### functions vs. methods
+Functions are designed to perform a task given some inputs. Methods are designed to do the same but are characteristically tied to an object.
+### arrow function syntax
+- you can use rest syntax with these, but parentheses are needed
+- if you only have a simgle simple parameter to the function, you can omit the parentheses for the arrow function. For example:
+```js
+(a) => {
+  return a + 100;
+};
+
+(a) => a + 100;
+
+a => a + 100;
+```
+- each of the above functions are equivalent to each other
 ## Event Listeners
 | Event Category | Description           |
 | -------------- | --------------------- |
@@ -313,7 +334,6 @@ uses the `@` symbol to do certain things based on certain conditions. For exampl
 - This API is also used as a cache for when data cannot be obtained from the server.
 - local storage values must be strings, numbers or booleans, Objects must be converted to [[JSON]] strings before being stored.
 - Below are the primary methods for setting and retrieving information
-
 ## [[JavaScript Promise]] 
 A promise is always in one of three states:
 1. pending
@@ -321,61 +341,161 @@ A promise is always in one of three states:
 3. rejected
 
 Creating a promise takes two functions as parameters.
-
 ### Then, catch, finally
 - `finally` is the last thing to be done in the callback chain
 - `then` is the next progressive step in the callback chain
 - `catch` is the error handling function of the callback chain.
-
-
-
 # Midterm Questions
-- In the following code, what does the link element do?
-- In the following code,  what does a div tag do? :: it creates an arbitrary division in your code that you can use for the purposes of structuring elements.
+- In the following code, what does the `<link>` element do? :: creates a link between the current document and other external resources.
+- In the following code,  what does a `<div>` tag do? :: it creates an arbitrary division in your code that you can use for the purposes of structuring elements.
 - In the following code, what is the difference between the `#title` and `.grid` selector? :: one is a id selector and the other is class selector
-- In the following code, what is the difference between padding and margin?
-- Given this HTML and this CSS how will the images be displayed using flex?
-- What does the following padding CSS do?
+- In the following code, what is the difference between padding and margin? :: padding is the space inside a container that surrounds it's contents. Margins are the space around the container controlling how it is spaced in relation to other elements
+- Given this [[HTML]] and this [[CSS]] how will the images be displayed using [[CSS Flex]]?
+- What does the following padding [[CSS]] do?
 - What does the following code using arrow syntax function declaration do?
-- What does the following code using map with an array output?
-- What does the following code output using getElementByID and addEventListener?
-- What does the following line of Javascript do using a # selector? :: it selects an object based on it's `id`
-- Which of the following are true? (mark all that are true about the DOM)
-- By default, the HTML span element has a default CSS display property value of: 
-- How would you use CSS to change all the div elements to have a background color of red?
+- What does the following code using `map` with an array output?
+- What does the following code output using `getElementByID` and `addEventListener`?
+- What does the following line of [[JavaScript]] do using a `#` selector? :: it selects an object based on it's `id`
 
-- How would you display an image with a hyperlink in HTML?
-- In the [[CSS]] box model, what is the ordering of the box layers starting at the inside and working out? :: box, padding, border, margin
+- Which of the following are true? (mark all that are true about the [[document object model (DOM)]])
+	- [[JavaScript]] can 
+		- change all [[HTML]] elements in the page
+		- change all [[HTML]] attributes in the page
+		- change all all [[CSS]] styles in the page
+		- remove existing [[HTML]] elements and attributes
+		- add new [[HTML]] elements and attributes in the page
+		- can react to all existing [[HTML]] events in the page
+		- create new [[HTML]] events in the page
+	- the DOM is accessed trhough a global variable name `document` that points to the root of the DOM.
+	- Every [[HTML]] element in a document implements the DOM interface which is derived from the DOM Node interface
+	- To create a new DOM element
+		1. first create the element in the DOM document i.e. `document.createElement('div')`
+		2. append the new element to an existing element in the DOM tree
+	- to delete an element, you select the element using querySelector or by id and then delete it by calling `removeChild(element)` on the parent of the element`
 
-- Given the following HTML, what CSS would you use to set the text "trouble" to green and leave the "double" text unaffected?
+- By default, the [[HTML]] span element has a default [[CSS]] display property value of :: inline
+
+- How would you use [[CSS]] to change all the `div` elements to have a background color of red?
+?
+```CSS
+div {
+	background-color: red;
+}
+```
+
+- How would you display an image with a hyperlink in [[HTML]]?
+?
+place the [[uniform resource locator (URL)]] in the `src` attribute of the `img` tag
+
+- In the [[CSS]] box model, what is the ordering of the box layers starting at the inside and working out? :: box --> padding --> border --> margin
+- Given the following [[HTML]], what [[CSS]] would you use to set the text "trouble" to green and leave the "double" text unaffected?
 - What will the following code output when executed using a for loop and `console.log`?
 - How would you use [[JavaScript]] to select an element with the id of “byu” and change the text color of that element to green? :: `document.getElementById("byu").style.color = "green";`
 - What is the opening [[HTML]] tag for a paragraph, ordered list, unordered list, second level heading, first level heading, third level heading? :: `<p>, <ol>, <ul>, <h1>, <h2>, <h3>`
 - How do you declare the document type to be html? :: `<!DOCTYPE html>`
-- What is valid [[javascript]] syntax for if, else, for, while, switch statements?
+
+- What is valid [[JavaScript]] syntax for if, else if, else statements?
+?
+```js
+if (statement) {
+	// do something
+} else if (anotherStatement) {
+	// do something else
+} else {
+	// do something really else
+}
+```
+
+- What is valid [[JavaScript]] syntax for `for` loop and `while` loop?
+?
+```js
+/*
+ * for (initialization; condition; afterthought) {
+ *     statement
+ * }
+ */
+ for (let i = 0; i < array.length; i++) {
+	 console.log(i);
+ }
+
+/*
+ * while (statement) {
+ *     action
+ * }
+ */
+ while (true) {
+	 console.log("while I am doing this I feel that");
+ }
+```
+
+- What is valid [[JavaScript]] syntax for switch statements?
+?
+```js
+/*
+ * switch (expression) {
+ *     case alternativeExpression1:
+ *         do something
+ *     case alternativeExpression2:
+ *         do something else
+ *     case alternativeExpression3:
+ *         do something really else
+ *     default:
+ *         do something that feels default
+ * }
+ */
+const expr = 'Papayas';
+switch (expr) {
+	case 'Oranges':
+	    console.log('Oranges are $0.59 a pound.');
+	    break;
+	case 'Mangoes':
+	case 'Papayas':
+	    console.log('Mangoes and papayas are $2.79 a pound.');
+	    // Expected output: "Mangoes and papayas are $2.79 a pound."
+	    break;
+	default:
+		console.log(`Sorry, we are out of ${expr}.`);
+}
+```
+
+
 
 - What is the correct syntax for creating a [[javascript]] object?
 ?
-```
+```js
 const obj = {
-	"key": "value",
-	"key1": "value"
+	key: "value",
+	key1: "value"
 }
 ```
 
 - Is it possible to add new properties to [[javascript]] objects? :: not technically
 - If you want to include [[JavaScript]] on an [[HTML]] page, which tag do you use? :: `<script>`
 - Given the following [[HTML]], what [[JavaScript]] could you use to set the text "animal" to "crow" and leave the "fish" text unaffected?
-- Which of the following correctly describes [[JSON]]? :: javascript object notation
-- What does the console command chmod, pwd, cd, ls, vim, nano, mkdir, mv, rm, man, ssh, ps, wget, sudo  do?
+- Which of the following correctly describes [[JSON]]? :: JavaScript object notation
+- What does the console command `chmod`, `pwd`, `cd`, `ls`, `vim`, `nano`, `mkdir`, `mv`, `rm`, `man`, `ssh`, `ps`, `wget`, `sudo` do?
+	- `chmod` - changes permissions of file
+	- `pwd` - prints working directory
+	- `cd` - changes current directory
+	- `ls` - lists directory contents
+	- `vim` - opens vim
+	- `nano` - opens nano
+	- `mkdir` - makes a new directory
+	- `mv` - moves/renames a file
+	- `rm` - removes a file(s)
+	- `man` - opens the man page for a particular command given as input
+	- `ssh` - allows a secure shell connection to be made between your computer and another
+	- `ps` - shows all runnig processes on the computer
+	- `wget` - GNU Wget is a free utility for non-interactive download of files
+       from the Web.  It supports [[HTTP]], HTTPS, and FTP protocols, as
+       well as retrieval through HTTP proxies.
+       `sudo` - allows a permitted user to execute a command as the superuser or another user
 
-- Which of the following console command creates a remote shell session?
-
-- Which of the following is true when the -la parameter is specified for the ls console command?
-
+- Which of the following console command creates a remote shell session? :: `ssh`
+- Which of the following is true when the -la parameter is specified for the ls console command? :: `-a` flag specifies to print all results to terminal, the `-l` flag means use a long listing format for the output.
 - Which of the following is true for the domain name banana.fruit.bozo.click, which is the top level domain, which is a subdomain, which is a root domain? ::
 - Is a web certificate is necessary to use HTTPS. :: yes
-- Can a DNS A record can point to an IP address or another A record.
+- Can a [[domain name system (DNS)]] A record point to an [[Internet Protocol (IP)]] address or another A record? :: it can only point to an IP address
 - Port 443 is reserved for which protocol? :: HTTPS
 - Port 80 is reserved for which protocol? :: HTTP
 - Port 22 is reserved for which protocol? :: SSH
