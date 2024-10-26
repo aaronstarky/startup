@@ -500,3 +500,250 @@ const obj = {
 - Port 80 is reserved for which protocol? :: HTTP
 - Port 22 is reserved for which protocol? :: SSH
 - What will the following code using Promises output when executed?
+
+# React JS
+A web framework for [[JavaScript]] that enables you to make responsive web applications. Has a friend named [[React Native]] that enables development for [[android]] and [[iOS]]. Big [[JavaScript XML (JSX)]] guy. Has similar appearance but much different tags and things than [[HTML]]. Heavily modular. You create components of [[JavaScript XML (JSX)]] that can be reused in other places and allow for some super fun abstraction :)
+## hooks
+hooks enable you to "hook" into react features like state management, navigation and more.
+## state
+whn you need to create a state variable, you use this syntax
+```jsx
+const [outlook, setOutlook] = React.useState("beautiful");
+```
+The variable outlook is now the variable that holds the state and the function setOutlook is the function that tells the React [[document object model (DOM)]] when to update the state.
+
+## React [[routing|Router]]
+### setup
+to set up the router, you just have to import the router that matches your application type and then wrap your entire application in that router component like so:
+```jsx
+import React from "react"
+import ReactDOM from "react-dom/client"
+import App from "./App"
+import { BrowserRouter } from "react-router-dom"
+
+const root = ReactDOM.createRoot(document.getElementById("root"))
+root.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
+)
+```
+### defining routes
+this is generally done at the top level of your application such as in the app component, but can be done anywhere you want. Observe:
+```jsx
+import { Route, Routes } from "react-router-dom"
+import { Home } from "./Home"
+import { BookList } from "./BookList"
+
+export function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/books" element={<BookList />} />
+    </Routes>
+  )
+}
+```
+Whenever your [[uniform resource locator (URL)]] changes, React Router will look at the routes defined in your `Routes` component and it will render the content in the `element` prop of the `Route` that has a `path` that matches the URL. In the above example if our URL was `/books` then the `BookList` component would be rendered.
+
+### handling navigation
+React uses it's own `<Link/>` component to handle navigation.
+```jsx
+import { Route, Routes, Link } from "react-router-dom"
+import { Home } from "./Home"
+import { BookList } from "./BookList"
+
+export function App() {
+  return (
+    <>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/books">Books</Link>
+          </li>
+        </ul>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/books" element={<BookList />} />
+      </Routes>
+    </>
+  )
+}
+```
+So now that there are link elements defined for each of the Route elements in the [[document object model (DOM)]], we we can access the routes that we have previously defined.
+#### `<Link/>` navigation
+links can do absolute navigation or relative path navigation.
+##### props
+- `replace`If you click on a link that goes to the `/books/3/edit` page but it has the `replace` property set to `true` your new history will look like this.
+- `reloadDocument` If it is set to `true` your `Link` component will act like a normal anchor tag and do a full page refresh on navigation instead of just re-rendering the content inside your `Routes` component.
+- `state` This prop lets you pass data along with your `Link` that does not show up anywhere in the [[uniform resource locator (URL)]].
+##### `NavLink`
+the navlink component works similar to the Link component except you
+#### manual navigation
+use the `useNavigate()` hook to assign a variable to a navigate function. then you can pass it data. refer to the docs for usage information.
+#### navigation data
+You can pass data using
+1. dynamic parameters
+2. search parameters - this is all of hte data that comes after the `?` in a [[uniform resource locator (URL)]]. You can parse these using the `useSearchParams` hook with is very similar to the `useState` hook.
+3. state/location data - use the `useLocation` hook. This takes no parameters and returns a single object return value.
+### [[Advanced Routing with React]]
+#### 1. Dynamic Routing
+To create a dynamic route, do something like is shown in this example:
+```jsx
+<Routes>
+  <Route path="/" element={<Home />} />
+  <Route path="/books" element={<BookList />} />
+  <Route path="/books/:id" element={<Book />} />
+</Routes>
+```
+Then anything after the route books will still route to the books route, but we will have new data to work with.
+
+Now we can access that data with `useParams`.
+```jsx
+import { useParams } from "react-router-dom"
+export function Book() {
+	const { id } = useParams();
+	return <h1>Book {id}</h1>
+}
+```
+#### 2. Routing priority
+Routing priority is an idea similar to [[polymorphism]] in that if we have dynamic routes and other routes that could match a dynamic route, it will take the one that is the most specific and apply that to the routing logic.
+#### 3. Nested routes
+Nested routes allows you to put routes within routes, basically giving sub routes, kinda similar to the work you did with [[Java Spring Boot]] at texas instruments where you could have nested [[MVC (Model View Controller)|controllers]] that handled subroutes of larger controllers.
+
+> [!QUOTE]
+> Let’s imagine that we want to render a nav section with links to each book as well the new book form from any of our book pages. To do this normally we would need to make a shared component to store this navigation and then import that into every single book related component. This is a bit of a pain, though, so React Router created its own solution to solve this problem. If you pass an `element` prop to a parent route it will render that component for every single child `Route` which means you can put a shared nav or other shared components on every child page with ease.
+
+```jsx
+<Routes>
+  <Route path="/" element={<Home />} />
+  <Route path="/books" element={<BooksLayout />}>
+    <Route index element={<BookList />} />
+    <Route path=":id" element={<Book />} />
+    <Route path="new" element={<NewBook />} />
+  </Route>
+  <Route path="*" element={<NotFound />} />
+</Routes>
+
+import { Link, Outlet } from "react-router-dom"
+
+export function BooksLayout() {
+  return (
+    <>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/books/1">Book 1</Link>
+          </li>
+          <li>
+            <Link to="/books/2">Book 2</Link>
+          </li>
+          <li>
+            <Link to="/books/new">New Book</Link>
+          </li>
+        </ul>
+      </nav>
+
+      <Outlet />
+    </>
+  )
+}
+```
+Now this new code states that if we match on the `/book` route it will render the BooksLayout component which contains our shared navigation components.
+
+Thus the `element` property is super powerful because it allows the nested routing to get it's power.
+#### 4. Multiple routes
+```jsx
+import { Route, Routes, Link } from "react-router-dom"
+import { Home } from "./Home"
+import { BookList } from "./BookList"
+import { BookSidebar } from "./BookSidebar"
+
+export function App() {
+  return (
+    <>
+      <nav>
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/books">Books</Link></li>
+        </ul>
+      </nav>
+
+      <aside>
+        <Routes>
+          <Route path="/books" element={<BookSidebar />}>
+        </Routes>
+      </aside>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/books" element={<BookList />} />
+      </Routes>
+    </>
+  )
+}
+```
+This code creates the main content of the page, but when we are on the `/books` route, we are also able to see the side bar `<BooksSideBar/>`  component.
+
+You can also move routes to their own file and import them as you would any other [[JavaScript XML (JSX)]] component.
+#### 5. `useRoutes` hook
+Allows you to specify your routes using [[JavaScript]] over [[JavaScript XML (JSX)]] if your prefer. The JSX example is on top, and the JavaScript example is on bottom.
+```jsx
+import { Route, Routes } from "react-router-dom"
+import { Home } from "./Home"
+import { BookList } from "./BookList"
+import { Book } from "./Book"
+
+export function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/books">
+        <Route index element={<BookList />} />
+        <Route path=":id" element={<Book />} />
+      </Route>
+    </Routes>
+  )
+}
+```
+
+```jsx
+import { Route, Routes } from "react-router-dom"
+import { Home } from "./Home"
+import { BookList } from "./BookList"
+import { Book } from "./Book"
+
+export function App() {
+  const element = useRoutes([
+    {
+      path: "/",
+      element: <Home />,
+    },
+    {
+      path: "/books",
+      children: [
+        { index: true, element: <BookList /> },
+        { path: ":id", element: <Book /> },
+      ],
+    },
+  ])
+
+  return element
+}
+```
+
+#### Types of Routers
+- BrowserRouter
+- NativeRouter
+- HashRouter
+	- In React Router this hash is not actually used to store id information for scrolling, but instead it stores information related to the current URL. The reason React Router does this is because some hosting providers do not allow you to actually change the [[uniform resource locator (URL)]] of your page. In those very rare circumstances you will want to use the `HashRouter` since the `HashRouter` will not change the actual URL of your page and will only change the hash of your page. If you are able to use any URL with your hosting provider then this is not something you should use.
+- History Router
+- MemoryRouter - stores routing information directly in memory
+- StaticRouter - this is meant for server rendering since it takes a single location prop and renders that location prop as the URL. It simply renders a single static page.
