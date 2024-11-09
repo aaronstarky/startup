@@ -1,0 +1,26 @@
+header, footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #acacac;
+    padding: 12px 8px;
+}
+
+.left-side-content {
+    display: flex;
+    gap: 8px;
+}
+
+svg {
+    width: 100px;
+    height: 100px;
+    /* fill: rgb(26, 106, 255); */
+    stroke: rgb(26, 106, 255);
+}
+
+
+
+nav {
+    display: flex;
+    gap: 8px;
+}

@@ -1,0 +1,10 @@
+.header-link {
+    color: #2e2e2e;
+    padding: 4px 8px;
+    border-radius: 100px;
+    cursor: pointer;
+    border: 0.5px;
+    border-style: solid;
+    text-decoration: none;
+    border-color: #6f6f6f;
+}
