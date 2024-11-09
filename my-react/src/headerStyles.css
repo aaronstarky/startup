@@ -2,8 +2,9 @@ header, footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #acacac;
+    background-color: rgb(26, 106, 255);
     padding: 12px 8px;
+    color: white;
 }
 
 .left-side-content {

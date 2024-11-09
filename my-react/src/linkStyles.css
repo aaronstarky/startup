@@ -1,10 +1,18 @@
 .header-link {
-    color: #2e2e2e;
+    color: #ffffff;
     padding: 4px 8px;
     border-radius: 100px;
     cursor: pointer;
     border: 0.5px;
     border-style: solid;
     text-decoration: none;
-    border-color: #6f6f6f;
+    border-color: #ffffff;
+}
+
+.header-link:hover {
+    background-color: rgb(64, 131, 255);
+}
+
+.header-link:active {
+    background-color: rgb(0, 89, 255);
 }
