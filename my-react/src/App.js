@@ -4,6 +4,7 @@ import Footer from './footer';
 import { Routes, Route } from 'react-router-dom';
 import About from './about';
 import Matches from './matches';
+import Login from './login';
 
 function App() {
   return (
@@ -12,13 +13,12 @@ function App() {
       <div class="content">
         <Routes>
           <Route path="/" element={<About />} />
-          {/* <Route path="/login" element={<Login/>}/> */}
+          <Route path="/login" element={<Login/>}/>
           {/* <Route path="/setup" element={<Setup/>}/> */}
           <Route path="/matches" element={<Matches />} />
           {/* <Route path="/track" element={<Track/>}/> */}
         </Routes>
       </div>
-      
       <Footer />
     </body>
   );
