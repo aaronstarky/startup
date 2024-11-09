@@ -16,3 +16,16 @@
 .header-link:active {
     background-color: rgb(0, 89, 255);
 }
+
+.interactive-button .header-link {
+    border-color: rgb(64, 131, 255);
+    border-style: solid;
+    color: rgb(64, 131, 255);
+}
+
+.interactive-button .header-link:hover {
+    border-color: rgb(64, 131, 255);
+    border-style: solid;
+    color: rgb(64, 131, 255);
+    background-color: rgb(209, 225, 255);
+}
