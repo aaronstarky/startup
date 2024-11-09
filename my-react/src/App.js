@@ -9,13 +9,16 @@ function App() {
   return (
     <body>
       <Header />
-      <Routes>
-        <Route path="/" element={<About />} />
-        {/* <Route path="/login" element={<Login/>}/> */}
-        {/* <Route path="/setup" element={<Setup/>}/> */}
-        <Route path="/matches" element={<Matches />} />
-        {/* <Route path="/track" element={<Track/>}/> */}
-      </Routes>
+      <div class="content">
+        <Routes>
+          <Route path="/" element={<About />} />
+          {/* <Route path="/login" element={<Login/>}/> */}
+          {/* <Route path="/setup" element={<Setup/>}/> */}
+          <Route path="/matches" element={<Matches />} />
+          {/* <Route path="/track" element={<Track/>}/> */}
+        </Routes>
+      </div>
+      
       <Footer />
     </body>
   );

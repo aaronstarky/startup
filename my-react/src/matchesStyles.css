@@ -13,7 +13,7 @@
 .match-list-item {
     display: flex;
     flex-direction: column;
-    background-color: rgb(68, 68,68);
+    background-color: rgb(216, 216, 216);
     border-radius: 20px;
     padding: 10px 20px;
     min-width: 300px;
