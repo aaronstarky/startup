@@ -19,9 +19,14 @@ svg {
     stroke: rgb(26, 106, 255);
 }
 
-
-
 nav {
     display: flex;
     gap: 8px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    
 }
