@@ -24,6 +24,11 @@
     background-color:rgb(9, 9, 9);
     color: white;
     font-weight: bold;
+    user-select: none;
+}
+
+.score-button:hover {
+    background-color: rgb(147, 185, 255);
 }
 
 .score-button.setting {
