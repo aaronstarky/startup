@@ -1,0 +1,35 @@
+
+#scoring-area {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    flex: auto;
+}
+
+.score-button {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px 20px;
+    margin: 20px 20px;
+    border-radius: 20px;
+    border-style: none;
+    min-width: 150px;
+    /* max-width: 300px; */
+    min-height: 100px;
+    background-color:rgb(9, 9, 9);
+    color: white;
+    font-weight: bold;
+}
+
+.score-button.setting {
+    justify-content: center;
+}
+
+.score {
+    font-size: xxx-large;
+} 
