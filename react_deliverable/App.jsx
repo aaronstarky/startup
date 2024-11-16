@@ -11,9 +11,8 @@ import Setup from './setup';
 function App() {
   return (
     <>
-      <body>
         <Header />
-        <div class="content">
+        <div className="content">
           <Routes>
             <Route path="/" element={<About />} />
             <Route path="/login" element={<Login />} />
@@ -23,7 +22,6 @@ function App() {
           </Routes>
         </div>
         <Footer />
-      </body>
     </>
   );
 }

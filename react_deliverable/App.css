@@ -81,3 +81,8 @@
   width: fit-content;
 }
 
+component {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
