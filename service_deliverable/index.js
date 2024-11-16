@@ -10,6 +10,13 @@ app.use(`/api`, apiRouter);
 
 // AUTH //////////////////////////////////////////////////////////////////
 let users = {};
+class User {
+    constructor(email, password) {
+        this.email = email;
+        this.password = password;
+        this.token = null;
+    }
+}
 // REGISTER
 apiRouter.post('/auth/register', async (req, res) => {
     console.log("/api/auth/register");
@@ -17,7 +24,7 @@ apiRouter.post('/auth/register', async (req, res) => {
         res.status(400).send({ msg: 'User already exists' });
         return;
     }
-    users[req.email] = { password: req.password };
+    users[req.email] = new User(req.email, req.password);
     res.send({ msg: 'User created' });
 });
 // LOGIN
@@ -33,7 +40,6 @@ apiRouter.post('/auth/login', async (req, res) => {
     }
     res.status(401).send({ msg: 'Unauthorized' });
 });
-
 // MATCHES //////////////////////////////////////////////////////////////
 let matches = [];
 class Match {
@@ -43,19 +49,30 @@ class Match {
         this.player2 = player2;
         this.score1 = score1;
         this.score2 = score2;
+        this.date = new Date();
     }
 }
 // GET MATCHES
 apiRouter.post('/match/:user_id', (_req, res) => {
-    res.send({ msg: `matches hit for user_id ${_req.params.user_id}` });
     console.log("/api/match/:user_id");
+    let user_matches = [];
+    for (let match of matches) {
+        if (match.player1 === _req.params.user_id || match.player2 === _req.params.user_id) {
+            user_matches.push(match);
+        }
+    }
+    res.status(200).send({ 
+        msg: `matches for ${_req.params.user_id}`,
+        matches: user_matches
+    });
     return;
 });
 // SUBMIT MATCH
 apiRouter.post('/match/submit', (req, res) => {
-    res.send({ msg: `submit match hit`});
     console.log("/api/match/submit");
-    return;
+    const match = new Match(req.player1, req.player2, req.score1, req.score2);
+    matches.push(match);
+    res.status(200).send({ msg: 'Match submitted successfully' });
 });
 
 // GAME INVITES /////////////////////////////////////////////////////////
