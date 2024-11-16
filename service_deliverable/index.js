@@ -40,10 +40,24 @@ apiRouter.post('/auth/login', async (req, res) => {
     }
     res.status(401).send({ msg: 'Unauthorized' });
 });
+// TRACK /////////////////////////////////////////////////////////////////
+apiRouter.post('/track/update/:match_id/:score1/:score2', async (req, res) => {
+    console.log("/api/track/update");
+    console.log(matches);
+    const match = matches[req.params.match_id];
+    if (match) {
+        match.score1 = req.params.score1;
+        match.score2 = req.params.score2;
+        res.status(200).send({ msg: 'Score updated' });
+        return;
+    }
+    res.status(401).send({ msg: 'Cannot find match to update' });
+});
 // MATCHES //////////////////////////////////////////////////////////////
 let matches = {};
 class Match {
-    constructor(uuid, player1, player2, score1, score2) {
+    constructor(player1, player2, score1, score2) {
+        this.uuid = uuid.v4();
         this.player1 = player1;
         this.player2 = player2;
         this.score1 = score1;
@@ -67,13 +81,8 @@ apiRouter.post('/match/submit/:uuid', async (req, res) => {
 // GET MATCHES
 apiRouter.post('/match/:user_id', async (_req, res) => {
     console.log("/api/match/:user_id");
-    const user = users[_req.params.user_id];
-    if (!user) {
-        res.status(400).send({ msg: 'User not found' });
-        return;
-    }
     let user_matches = [];
-    for (let match of matches) {
+    for (const [match_id, match] of Object.entries(matches)) {
         if (match.player1 === _req.params.user_id || match.player2 === _req.params.user_id) {
             user_matches.push(match);
         }
@@ -84,34 +93,14 @@ apiRouter.post('/match/:user_id', async (_req, res) => {
     return;
 });
 // START MATCH
-apiRouter.post('/match/start/:match_id/:player1/:player2/:score1/:score2', async (_req, res) => {
-    console.log("/api/match/start/:match_id");
-    const match = new Match(_req.params.match_id, _req.params.player1, _req.params.player2, _req.params.score1, _req.params.score2);
-    matches[_req.params.match_id] = match;
-    res.status(200).send({ msg: 'Match started' });
+apiRouter.post('/match/start/:player1/:player2/:score1/:score2', async (_req, res) => {
+    console.log("/api/match/start/:player1/:player2/:score1/:score2");
+    const match = new Match(_req.params.player1, _req.params.player2, _req.params.score1, _req.params.score2);
+    matches[match.uuid] = match;
+    res.status(200).send({ msg: 'Match started', match_id: match.uuid });
     return;
 });
 
-// GAME INVITES /////////////////////////////////////////////////////////
-let invites = [];
-class Invite {
-    constructor(from, to) {
-        this.uuid = uuid.v4();
-        this.match_uuid = null;
-        this.from = from;
-        this.to = to;
-    }
-}
-// GET INVITES
-apiRouter.post('/invite', (_req, res) => {
-    console.log("/api/invite");
-    return;
-});
-// SEND INVITE
-apiRouter.post('/invite/:match_id/:from_user_id/:to_user_id', (req, res) => {
-    console.log("/api/invite/:match_id/:from_user_id/:to_user_id");
-    return;
-});
 
 app.get('/', (_req, res) => {
     res.send({ msg: 'Picklematch services baby 🎉' });
