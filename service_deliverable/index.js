@@ -53,7 +53,15 @@ class Match {
     }
 }
 // GET MATCHES
-apiRouter.post('/match/:user_id', (_req, res) => {
+apiRouter.post('/match/submit/:player1/:player2/:score1/:score2', async (req, res) => {
+    console.log("/api/match/submit");
+    // console.log(req.player1, req.player2, req.score1, req.score2);
+    const match = new Match(req.params.player1, req.params.player2, req.params.score1, req.params.score2);
+    matches.push(match);
+    res.status(200).send({ msg: 'Match submitted successfully' });
+    console.log(matches);
+});
+apiRouter.post('/match/:user_id', async (_req, res) => {
     console.log("/api/match/:user_id");
     let user_matches = [];
     for (let match of matches) {
@@ -61,19 +69,12 @@ apiRouter.post('/match/:user_id', (_req, res) => {
             user_matches.push(match);
         }
     }
-    res.status(200).send({ 
-        msg: `matches for ${_req.params.user_id}`,
+    res.status(200).send({
         matches: user_matches
     });
     return;
 });
 // SUBMIT MATCH
-apiRouter.post('/match/submit', (req, res) => {
-    console.log("/api/match/submit");
-    const match = new Match(req.player1, req.player2, req.score1, req.score2);
-    matches.push(match);
-    res.status(200).send({ msg: 'Match submitted successfully' });
-});
 
 // GAME INVITES /////////////////////////////////////////////////////////
 let invites = [];
