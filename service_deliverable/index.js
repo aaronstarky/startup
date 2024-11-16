@@ -1,31 +1,31 @@
 const express = require('express');
 const uuid = require('uuid');
 const app = express();
-
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
-
-
-
 app.use(express.static('public'));
+
+var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
 // AUTH //////////////////////////////////////////////////////////////////
 let users = {};
 // REGISTER
 apiRouter.post('/auth/register', async (req, res) => {
-    if (users[req.body.email]) {
+    console.log("/api/auth/register");
+    if (users[req.email]) {
         res.status(400).send({ msg: 'User already exists' });
         return;
     }
-    users[req.body.email] = { password: req.body.password };
+    users[req.email] = { password: req.password };
     res.send({ msg: 'User created' });
 });
 // LOGIN
 apiRouter.post('/auth/login', async (req, res) => {
-    const user = users[req.body.email];
+    console.log("/api/auth/login");
+    const user = users[req.email];
     if (user) {
-        if (req.body.password === user.password) {
+        if (req.password === user.password) {
             user.token = uuid.v4();
             res.send({ token: user.token });
             return;
@@ -46,11 +46,15 @@ class Match {
     }
 }
 // GET MATCHES
-apiRouter.post('/match', (_req, res) => {
+apiRouter.post('/match/:user_id', (_req, res) => {
+    res.send({ msg: `matches hit for user_id ${_req.params.user_id}` });
+    console.log("/api/match/:user_id");
     return;
 });
 // SUBMIT MATCH
-apiRouter.post('/score', (req, res) => {
+apiRouter.post('/match/submit', (req, res) => {
+    res.send({ msg: `submit match hit`});
+    console.log("/api/match/submit");
     return;
 });
 
@@ -65,14 +69,16 @@ class Invite {
 }
 // GET INVITES
 apiRouter.post('/invite', (_req, res) => {
+    console.log("/api/invite");
     return;
 });
 // SEND INVITE
-apiRouter.post('/invite', (req, res) => {
+apiRouter.post('/invite/:match_id/:from_user_id/:to_user_id', (req, res) => {
+    console.log("/api/invite/:match_id/:from_user_id/:to_user_id");
     return;
 });
 
-app.get('*', (_req, res) => {
+app.get('/', (_req, res) => {
     res.send({ msg: 'Picklematch services baby 🎉' });
 });
 
