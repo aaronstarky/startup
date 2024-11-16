@@ -104,6 +104,13 @@ app.get('/', (_req, res) => {
     res.send({ msg: 'Picklematch services baby 🎉' });
 });
 
+app.get('/weather', async (_req, res) => {
+    const response = await fetch('https://goweather.herokuapp.com/weather/Denver');
+    const data = await response.json();
+    console.log(data);
+    res.send(data);
+});
+
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
