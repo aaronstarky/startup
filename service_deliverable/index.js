@@ -7,7 +7,6 @@ app.use(express.static('public'));
 
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
-
 // AUTH //////////////////////////////////////////////////////////////////
 let users = {};
 class User {
@@ -39,19 +38,6 @@ apiRouter.post('/auth/login', async (req, res) => {
         }
     }
     res.status(401).send({ msg: 'Unauthorized' });
-});
-// TRACK /////////////////////////////////////////////////////////////////
-apiRouter.post('/track/update/:match_id/:score1/:score2', async (req, res) => {
-    console.log("/api/track/update");
-    console.log(matches);
-    const match = matches[req.params.match_id];
-    if (match) {
-        match.score1 = req.params.score1;
-        match.score2 = req.params.score2;
-        res.status(200).send({ msg: 'Score updated' });
-        return;
-    }
-    res.status(401).send({ msg: 'Cannot find match to update' });
 });
 // MATCHES //////////////////////////////////////////////////////////////
 let matches = {};
@@ -100,8 +86,20 @@ apiRouter.post('/match/start/:player1/:player2/:score1/:score2', async (_req, re
     res.status(200).send({ msg: 'Match started', match_id: match.uuid });
     return;
 });
-
-
+// UPDATE SCORE
+apiRouter.post('/match/update/:match_id/:score1/:score2', async (req, res) => {
+    console.log("/api/match/update/:match_id/:score1/:score2");
+    console.log(matches);
+    const match = matches[req.params.match_id];
+    if (match) {
+        match.score1 = req.params.score1;
+        match.score2 = req.params.score2;
+        res.status(200).send({ msg: 'Score updated' });
+        return;
+    }
+    res.status(401).send({ msg: 'Cannot find match to update' });
+});
+// DEFAULT ///////////////////////////////////////////////////////////////
 app.get('/', (_req, res) => {
     res.send({ msg: 'Picklematch services baby 🎉' });
 });
