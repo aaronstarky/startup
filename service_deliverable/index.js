@@ -1,17 +1,14 @@
 const express = require('express');
 const uuid = require('uuid');
+const cors = require('cors');
 const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 
 app.use(express.static('public'));
 
-app.use((req, res) => {
-    const allowedOrigins = ['http://localhost:5173'];
-    const origin = req.headers.origin;
-    if (allowedOrigins.includes(origin)) {
-        res.setHeader('Access-Control-Allow-Origin', origin);
-    }
-});
+app.use(cors({
+    origin: 'http://localhost:5173' // Allow requests from your React app
+}));
 
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
@@ -116,7 +113,6 @@ app.get('/weather', async (_req, res) => {
     console.log("/weather");
     const response = await fetch('https://goweather.herokuapp.com/weather/Denver');
     const data = await response.json();
-    console.log(data);
     res.send(data);
 });
 
