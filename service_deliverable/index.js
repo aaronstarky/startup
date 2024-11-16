@@ -41,28 +41,37 @@ apiRouter.post('/auth/login', async (req, res) => {
     res.status(401).send({ msg: 'Unauthorized' });
 });
 // MATCHES //////////////////////////////////////////////////////////////
-let matches = [];
+let matches = {};
 class Match {
-    constructor(player1, player2, score1, score2) {
-        this.uuid = uuid.v4();
+    constructor(uuid, player1, player2, score1, score2) {
         this.player1 = player1;
         this.player2 = player2;
         this.score1 = score1;
         this.score2 = score2;
         this.date = new Date();
+        this.live = true;
     }
 }
-// GET MATCHES
-apiRouter.post('/match/submit/:player1/:player2/:score1/:score2', async (req, res) => {
+// SUBMIT MATCH
+apiRouter.post('/match/submit/:uuid', async (req, res) => {
     console.log("/api/match/submit");
-    // console.log(req.player1, req.player2, req.score1, req.score2);
-    const match = new Match(req.params.player1, req.params.player2, req.params.score1, req.params.score2);
-    matches.push(match);
-    res.status(200).send({ msg: 'Match submitted successfully' });
+    const match = matches[req.params.uuid];
+    if (match) {
+        matches[req.params.uuid].live = false;
+        res.status(200).send({ msg: 'Match submitted successfully' });
+        return;
+    }
+    res.status(400).send({ msg: 'Match not found' });
     console.log(matches);
 });
+// GET MATCHES
 apiRouter.post('/match/:user_id', async (_req, res) => {
     console.log("/api/match/:user_id");
+    const user = users[_req.params.user_id];
+    if (!user) {
+        res.status(400).send({ msg: 'User not found' });
+        return;
+    }
     let user_matches = [];
     for (let match of matches) {
         if (match.player1 === _req.params.user_id || match.player2 === _req.params.user_id) {
@@ -74,13 +83,21 @@ apiRouter.post('/match/:user_id', async (_req, res) => {
     });
     return;
 });
-// SUBMIT MATCH
+// START MATCH
+apiRouter.post('/match/start/:match_id/:player1/:player2/:score1/:score2', async (_req, res) => {
+    console.log("/api/match/start/:match_id");
+    const match = new Match(_req.params.match_id, _req.params.player1, _req.params.player2, _req.params.score1, _req.params.score2);
+    matches[_req.params.match_id] = match;
+    res.status(200).send({ msg: 'Match started' });
+    return;
+});
 
 // GAME INVITES /////////////////////////////////////////////////////////
 let invites = [];
 class Invite {
     constructor(from, to) {
         this.uuid = uuid.v4();
+        this.match_uuid = null;
         this.from = from;
         this.to = to;
     }
