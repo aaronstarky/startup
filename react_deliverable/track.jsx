@@ -25,6 +25,35 @@ export default function Track() {
         }
     }
 
+    async function submitFinalScore() {
+        const encodedUrl = encodeURI(`http://localhost:4000/api/match/submit/${localStorage.getItem("matchId")}`);
+        const response = await fetch(encodedUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if (response.status === 200) {
+            return;
+        }
+        else {
+            alert("Error submitting match");
+        }
+    }
+
+    async function checkWinner() {
+        if (team1Score >= 11 && team1Score - team2Score >= 2) {
+            alert("Team 1 wins!");
+            await submitFinalScore();
+            return true;
+        } else if (team2Score >= 11 && team2Score - team1Score >= 2) {
+            alert("Team 2 wins!");
+            await submitFinalScore();
+            return true;
+        }
+        return false;
+    }
+
     const incrementScore = async (team) => {
         if (team === "team1") {
             updateTeam1Score(team1Score + 1);
@@ -35,6 +64,7 @@ export default function Track() {
             await sendScoreUpdate(team1Score, team2Score);
             actions.push("t2");
         }
+        await checkWinner();
         
     }
 
