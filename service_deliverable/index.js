@@ -14,6 +14,7 @@ var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 // AUTH //////////////////////////////////////////////////////////////////
 let users = {};
+let tokens = new Set();
 class User {
     constructor(email, password) {
         this.email = email;
@@ -32,15 +33,25 @@ apiRouter.post('/auth/register', async (req, res) => {
     res.send({ msg: 'User created' });
 });
 // LOGIN
-apiRouter.post('/auth/login', async (req, res) => {
+apiRouter.post('/auth/login/:email/:password', async (req, res) => {
     console.log("/api/auth/login");
-    const user = users[req.email];
+    const user = users[req.params.email];
     if (user) {
-        if (req.password === user.password) {
+        if (req.params.password === user.password) {
             user.token = uuid.v4();
+            tokens.add(user.token);
             res.send({ token: user.token });
             return;
         }
+    }
+    res.status(401).send({ msg: 'Unauthorized' });
+});
+// VERIFY
+apiRouter.post('/auth/verify', async (req, res) => {
+    console.log("/api/auth/verify");
+    if (tokens.has(req.token)) {
+        res.status(200).send({ msg: 'Authorized' });
+        return;
     }
     res.status(401).send({ msg: 'Unauthorized' });
 });

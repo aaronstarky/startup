@@ -1,3 +1,9 @@
+* {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
 .App {
   text-align: center;
 }
@@ -32,9 +38,14 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+#login-form {
+  text-align: center;
 }
 
 .content {
@@ -44,19 +55,38 @@
 
 
 .auth-box {
-  background-color: rgb(216, 216, 216);
   border-radius: 5px;
-    margin: 20px 20px 20px;
-    padding: 20px 20px;
-    width: max-content;
-    display: flex;
-    flex-direction: column;
+  padding: 10px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 700px;
+  color: #282c34;
 }
 
 #login-form {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+button {
+  background-color: #282c34;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+input {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #3b3b3b;
+  border-radius: 100px;
+  text-shadow: none;
+  outline: none;
+  width: 300px;
 }
 
 .page-info {

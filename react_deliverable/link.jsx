@@ -6,7 +6,7 @@ export default function HeaderLink({href, text}) {
     const myText = text;
     
     return (
-        <Link class="header-link" to={href}>
+        <Link className="header-link" to={href}>
             {text}
         </Link>
     )
