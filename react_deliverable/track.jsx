@@ -1,12 +1,31 @@
 import './track-styles.css'
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 let actions = [];
 
 export default function Track() {
     let [team1Score, updateTeam1Score] = React.useState(0);
     let [team2Score, updateTeam2Score] = React.useState(0);
-    
+    let [initial, updateInitial] = React.useState(true);
+    const navigate = useNavigate();
+
+    if (initial) {
+        const encodedUrl = encodeURI(`http://localhost:4000/api/match/get/${localStorage.getItem("matchId")}`);
+        fetch(encodedUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }).then(response => response.json()).then(data => {
+            updateTeam1Score(Number(data.matches[0].score1));
+            updateTeam2Score(Number(data.matches[0].score2));
+        }).finally(() => {
+            updateInitial(false);
+            console.log("Initial state set");
+        });
+    }
+
 
     async function sendScoreUpdate(team1Score, team2Score) {
         const encodedUrl = encodeURI(`http://localhost:4000/api/match/update/${localStorage.getItem("matchId")}/${team1Score}/${team2Score}`);
@@ -34,11 +53,10 @@ export default function Track() {
             },
         });
         if (response.status === 200) {
+            navigate("/matches");
             return;
         }
-        else {
-            alert("Error submitting match");
-        }
+        alert("Error submitting final score");
     }
 
     async function checkWinner() {
@@ -58,14 +76,14 @@ export default function Track() {
         if (team === "team1") {
             updateTeam1Score(team1Score + 1);
             await sendScoreUpdate(team1Score, team2Score);
+            await checkWinner();
             actions.push("t1");
         } else {
             updateTeam2Score(team2Score + 1);
             await sendScoreUpdate(team1Score, team2Score);
+            await checkWinner();
             actions.push("t2");
         }
-        await checkWinner();
-        
     }
 
     const undo = async () => {
@@ -78,12 +96,12 @@ export default function Track() {
         }
         await sendScoreUpdate(team1Score, team2Score);
     }
-    
+
     return (
         <div>
             <h1>Track</h1>
             <div id="scoring-area">
-                <div className="score-button" id="team1" onClick={()=> incrementScore("team1")}>
+                <div className="score-button" id="team1" onClick={() => incrementScore("team1")}>
                     <div className="score" id="team1Score">
                         {team1Score}
                     </div>
@@ -91,7 +109,7 @@ export default function Track() {
                         Team 1
                     </div>
                 </div>
-                <div className="score-button" id="team2" onClick={()=> incrementScore("team2")}>
+                <div className="score-button" id="team2" onClick={() => incrementScore("team2")}>
                     <div className="score" id="team2Score">
                         {team2Score}
                     </div>

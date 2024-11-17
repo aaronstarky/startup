@@ -1,5 +1,6 @@
 .match-list {
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     overflow: auto;
     flex-direction: row;
@@ -30,6 +31,3 @@
     align-items: center;
 }
 
-.score {
-    font-size: 5em;
-}

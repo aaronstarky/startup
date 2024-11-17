@@ -2,24 +2,24 @@ import './matchesStyles.css'
 
 export default function Match({ player1, player2, player1Score, player2Score, date }) {
     return (
-        <div class="match-list-item">
-            <div class="date">
+        <div className="match-list-item">
+            <div className="date">
                 {date}
             </div>
-            <div class="scoring-summary">
-                <div class="score-card-team-info">
-                    <div class="score">
+            <div className="scoring-summary">
+                <div className="score-card-team-info">
+                    <h1 className="score">
                         {player1Score}
-                    </div>
-                    <div class="team-mate">
+                    </h1>
+                    <div className="team-mate">
                         {player1}
                     </div>
                 </div>
-                <div class="score-card-team-info">
-                    <div class="score">
+                <div className="score-card-team-info">
+                    <h1 className="score">
                         {player2Score}
-                    </div>
-                    <div class="team-mate">
+                    </h1>
+                    <div className="team-mate">
                         {player2}
                     </div>
                 </div>

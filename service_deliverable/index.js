@@ -94,6 +94,17 @@ apiRouter.post('/match/:user_id', async (_req, res) => {
     });
     return;
 });
+apiRouter.post('/match/get/:match_id', async (_req, res) => {
+    console.log("/api/match/get/:match_id");
+    const match = matches[_req.params.match_id];
+    if (match) {
+        res.status(200).send({
+            matches: [match]
+        });
+        return;
+    }
+    res.status(400).send({ msg: 'Match not found' });
+});
 // START MATCH
 apiRouter.post('/match/start/:player1/:player2/:score1/:score2', async (_req, res) => {
     console.log("/api/match/start/:player1/:player2/:score1/:score2");

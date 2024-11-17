@@ -1,65 +1,57 @@
-import { redirect, redirectDocument } from "react-router-dom";
-import Match from "./match"
-import './matchesStyles.css'
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Match from './match';
+import './matchesStyles.css';
 
 export default function Matches() {
-    const token = localStorage.getItem("token");
-    if (!token) {
-        return (
-            <>
-                <h1>Log in to access matches.</h1>
-            </>
-        )
+    const [matches, setMatches] = useState([]);
+    const navigate = useNavigate();
+    const token = localStorage.getItem('token');
+    const email = localStorage.getItem('email');
+
+    useEffect(() => {
+        if (!token) {
+            navigate('/login'); // Redirect to login page if no token
+        } else {
+            getMatches();
+        }
+    }, [token, navigate]);
+
+    async function getMatches() {
+        try {
+            const encodedUrl = encodeURI(`http://localhost:4000/api/match/${email}`);
+            const response = await fetch(encodedUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            const data = await response.json();
+            setMatches(data.matches);
+            console.log(data.matches);
+        } catch (error) {
+            console.error('Error fetching matches:', error);
+        }
     }
-    // fetch('http://localhost:4000/api/auth/verify/
+    if (!token) {
+        return <h1>Log in to access matches.</h1>;
+    }
 
     return (
         <div>
             <h1>Matches</h1>
-            <div class="match-list">
-                <Match 
-                    player1={"Aaron Starkweather"}
-                    player2={"Bobby Fischer"}
-                    player1Score={21}
-                    player2Score={19}
-                    date={"2021-10-01"}
-                /> 
-                <Match 
-                    player1={"Aaron Starkweather"}
-                    player2={"Bobby Fischer"}
-                    player1Score={21}
-                    player2Score={19}
-                    date={"2021-10-01"}
-                />
-                <Match 
-                    player1={"Aaron Starkweather"}
-                    player2={"Bobby Fischer"}
-                    player1Score={21}
-                    player2Score={19}
-                    date={"2021-10-01"}
-                />
-                <Match 
-                    player1={"Aaron Starkweather"}
-                    player2={"Bobby Fischer"}
-                    player1Score={21}
-                    player2Score={19}
-                    date={"2021-10-01"}
-                /> 
-                <Match 
-                    player1={"Aaron Starkweather"}
-                    player2={"Bobby Fischer"}
-                    player1Score={21}
-                    player2Score={19}
-                    date={"2021-10-01"}
-                /> 
-                <Match 
-                    player1={"Aaron Starkweather"}
-                    player2={"Bobby Fischer"}
-                    player1Score={21}
-                    player2Score={19}
-                    date={"2021-10-01"}
-                /> 
+            <div className="match-list">
+                {matches.map((match, index) => (
+                    <Match
+                        key={index}
+                        player1={match.player1}
+                        player2={match.player2}
+                        player1Score={match.score1}
+                        player2Score={match.score2}
+                        date={match.date}
+                    />
+                ))}
             </div>
         </div>
-    )
+    );
 }
