@@ -8,17 +8,37 @@ export default function Track() {
     let [team2Score, updateTeam2Score] = React.useState(0);
     
 
-    const incrementScore = (team) => {
-        if (team === "team1") {
-            updateTeam1Score(team1Score + 1);
-            actions.push("t1");
-        } else {
-            updateTeam2Score(team2Score + 1);
-            actions.push("t2");
+    async function sendScoreUpdate(team1Score, team2Score) {
+        const encodedUrl = encodeURI(`http://localhost:4000/api/match/update/${localStorage.getItem("matchId")}/${team1Score}/${team2Score}`);
+        console.log(encodedUrl);
+        const response = await fetch(encodedUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if (response.status === 200) {
+            return;
+        }
+        else {
+            alert("Error updating score");
         }
     }
 
-    const undo = () => {
+    const incrementScore = async (team) => {
+        if (team === "team1") {
+            updateTeam1Score(team1Score + 1);
+            await sendScoreUpdate(team1Score, team2Score);
+            actions.push("t1");
+        } else {
+            updateTeam2Score(team2Score + 1);
+            await sendScoreUpdate(team1Score, team2Score);
+            actions.push("t2");
+        }
+        
+    }
+
+    const undo = async () => {
         let lastAction = actions.pop();
         if (lastAction === "t1") {
             updateTeam1Score(team1Score - 1);
@@ -26,29 +46,30 @@ export default function Track() {
             if (team2Score != 0)
                 updateTeam2Score(team2Score - 1);
         }
+        await sendScoreUpdate(team1Score, team2Score);
     }
     
     return (
         <div>
             <h1>Track</h1>
             <div id="scoring-area">
-                <div class="score-button" id="team1" onClick={()=> incrementScore("team1")}>
-                    <div class="score" id="team1Score">
+                <div className="score-button" id="team1" onClick={()=> incrementScore("team1")}>
+                    <div className="score" id="team1Score">
                         {team1Score}
                     </div>
-                    <div class="team-name" id="team1Name">
+                    <div className="team-name" id="team1Name">
                         Team 1
                     </div>
                 </div>
-                <div class="score-button" id="team2" onClick={()=> incrementScore("team2")}>
-                    <div class="score" id="team2Score">
+                <div className="score-button" id="team2" onClick={()=> incrementScore("team2")}>
+                    <div className="score" id="team2Score">
                         {team2Score}
                     </div>
-                    <div class="team-name" id="team2Name">
+                    <div className="team-name" id="team2Name">
                         Team 2
                     </div>
                 </div>
-                <div class="score-button setting" id="team2" onClick={undo}>
+                <div className="score-button setting" id="team2" onClick={undo}>
                     <div>
                         Undo
                     </div>

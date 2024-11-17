@@ -23,13 +23,13 @@ class User {
     }
 }
 // REGISTER
-apiRouter.post('/auth/register', async (req, res) => {
+apiRouter.post('/auth/register/:email/:password', async (req, res) => {
     console.log("/api/auth/register");
-    if (users[req.email]) {
+    if (users[req.params.email]) {
         res.status(400).send({ msg: 'User already exists' });
         return;
     }
-    users[req.email] = new User(req.email, req.password);
+    users[req.params.email] = new User(req.params.email, req.params.password);
     res.send({ msg: 'User created' });
 });
 // LOGIN
@@ -47,9 +47,9 @@ apiRouter.post('/auth/login/:email/:password', async (req, res) => {
     res.status(401).send({ msg: 'Unauthorized' });
 });
 // VERIFY
-apiRouter.post('/auth/verify', async (req, res) => {
+apiRouter.post('/auth/verify/:token', async (req, res) => {
     console.log("/api/auth/verify");
-    if (tokens.has(req.token)) {
+    if (tokens.has(req.params.token)) {
         res.status(200).send({ msg: 'Authorized' });
         return;
     }
@@ -105,11 +105,11 @@ apiRouter.post('/match/start/:player1/:player2/:score1/:score2', async (_req, re
 // UPDATE SCORE
 apiRouter.post('/match/update/:match_id/:score1/:score2', async (req, res) => {
     console.log("/api/match/update/:match_id/:score1/:score2");
-    console.log(matches);
-    const match = matches[req.params.match_id];
+    let match = matches[req.params.match_id];
+    console.log(req.params.match_id, req.params.score1, req.params.score2);
     if (match) {
-        match.score1 = req.params.score1;
-        match.score2 = req.params.score2;
+        const newMatch = new Match(match.player1, match.player2, req.params.score1, req.params.score2);
+        matches[req.params.match_id] = newMatch;
         res.status(200).send({ msg: 'Score updated' });
         return;
     }
