@@ -2,12 +2,19 @@ const express = require('express');
 const uuid = require('uuid');
 const cors = require('cors');
 const app = express();
-const port = process.argv.length > 2 ? process.argv[2] : 4000;
+const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
 app.use(express.static('public'));
 
+const allowedOrigins = ['https://localhost:5173', 'https://startup.picklematch.click', '*', '0.0.0.0'];
 app.use(cors({
-    origin: 'http://localhost:5173' // Allow requests from your React app
+  origin: function(origin, callback) {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      return callback(new Error('CORS policy violation'), false);
+    }
+    return callback(null, true);
+  }
 }));
 
 var apiRouter = express.Router();

@@ -2,13 +2,11 @@
 import React, { useState } from 'react';
 import './App.css';
 
-
-
 export default function About() {
     const [description, setDescription] = useState("getting description");
     const [temperature, setTemperature] = useState("getting temperature");
 
-    fetch('http://localhost:4000/weather', {
+    fetch('http://localhost:3000/weather', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

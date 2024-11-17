@@ -11,7 +11,7 @@ export default function Track() {
     const navigate = useNavigate();
 
     if (initial) {
-        const encodedUrl = encodeURI(`http://localhost:4000/api/match/get/${localStorage.getItem("matchId")}`);
+        const encodedUrl = encodeURI(`http://localhost:3000/api/match/get/${localStorage.getItem("matchId")}`);
         fetch(encodedUrl, {
             method: 'POST',
             headers: {
@@ -28,7 +28,7 @@ export default function Track() {
 
 
     async function sendScoreUpdate(team1Score, team2Score) {
-        const encodedUrl = encodeURI(`http://localhost:4000/api/match/update/${localStorage.getItem("matchId")}/${team1Score}/${team2Score}`);
+        const encodedUrl = encodeURI(`http://localhost:3000/api/match/update/${localStorage.getItem("matchId")}/${team1Score}/${team2Score}`);
         console.log(encodedUrl);
         const response = await fetch(encodedUrl, {
             method: 'POST',
@@ -45,7 +45,7 @@ export default function Track() {
     }
 
     async function submitFinalScore() {
-        const encodedUrl = encodeURI(`http://localhost:4000/api/match/submit/${localStorage.getItem("matchId")}`);
+        const encodedUrl = encodeURI(`http://localhost:3000/api/match/submit/${localStorage.getItem("matchId")}`);
         const response = await fetch(encodedUrl, {
             method: 'POST',
             headers: {

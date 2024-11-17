@@ -19,7 +19,7 @@ export default function Matches() {
 
     async function getMatches() {
         try {
-            const encodedUrl = encodeURI(`http://localhost:4000/api/match/${email}`);
+            const encodedUrl = encodeURI(`http://localhost:3000/api/match/${email}`);
             const response = await fetch(encodedUrl, {
                 method: 'POST',
                 headers: {
