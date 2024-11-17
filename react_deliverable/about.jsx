@@ -6,7 +6,7 @@ export default function About() {
     const [description, setDescription] = useState("getting description");
     const [temperature, setTemperature] = useState("getting temperature");
 
-    fetch('http://localhost:3000/weather', {
+    fetch('/weather', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

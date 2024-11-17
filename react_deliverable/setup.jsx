@@ -6,7 +6,7 @@ export default function Setup() {
     async function startMatch() {
         const player1 = document.getElementById("player1").value;
         const player2 = document.getElementById("player2").value;
-        const encodedUrl = encodeURI(`http://localhost:3000/api/match/start/${player1}/${player2}/0/0`);
+        const encodedUrl = encodeURI(`/api/match/start/${player1}/${player2}/0/0`);
         const response = await fetch(encodedUrl, {
             method: 'POST',
             headers: {
