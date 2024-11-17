@@ -82,8 +82,31 @@ With this deliverable, I added styling to the header and footer. I also added st
 - [X] match list items styled like cards
 
 ## React Deliverable
+With this deliverable, I converted the entire application to React and used some fun hooks in the process!
+
+- [X] Create header comp
+- [X] create footer component
+- [X] create header link component
+- [X] create match list item component
+- [X] create login components
+- [X] useState hooks for win conditions
+- [X] useNavigate hooks for win conditions
 
 ## Service Deliverable
+With this deliverable I created an Express.js backend for the application. This includes services for registering users, logging in users, sending score updates, retrieving match data from the backend and more.
+
+- [X] auth
+	- [X] allow user to create account
+	- [X] allow user to login
+- [X] matches
+	- [X] create a new match
+	- [X] load all matches that include the user
+- [X] track
+	- [X] send score updates
+	- [X] get initial score so that users can navigate around the page while keeping their current game active
+	- [X] undo scores in the database
+- [X] third party service
+	- [X] used weather API service to get the current weather so people can decide whether or not to play pickleball that day.
 
 ## DB/Login Deliverable
 
