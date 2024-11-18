@@ -331,6 +331,11 @@ a => a + 100;
 
 ## Local Storage in [[JavaScript]]
 - You can use the `localStorage` API to persistently share and retrieve data on a users browser across user sessions and [[HTML]] page renderings.
+- To retrieve an item from localStorage:
+```js
+const session = JSON.parse(localStorage.getItem('supabase_session'));
+```
+
 - This API is also used as a cache for when data cannot be obtained from the server.
 - local storage values must be strings, numbers or booleans, Objects must be converted to [[JSON]] strings before being stored.
 - Below are the primary methods for setting and retrieving information
@@ -501,19 +506,18 @@ const obj = {
 - Port 22 is reserved for which protocol? :: SSH
 - What will the following code using Promises output when executed?
 
-# React JS
-A web framework for [[JavaScript]] that enables you to make responsive web applications. Has a friend named [[React Native]] that enables development for [[android]] and [[iOS]]. Big [[JavaScript XML (JSX)]] guy. Has similar appearance but much different tags and things than [[HTML]]. Heavily modular. You create components of [[JavaScript XML (JSX)]] that can be reused in other places and allow for some super fun abstraction :)
-## hooks
+
+# hooks
 hooks enable you to "hook" into react features like state management, navigation and more.
-## state
+# state
 whn you need to create a state variable, you use this syntax
 ```jsx
 const [outlook, setOutlook] = React.useState("beautiful");
 ```
 The variable outlook is now the variable that holds the state and the function setOutlook is the function that tells the React [[document object model (DOM)]] when to update the state.
 
-## React [[routing|Router]]
-### setup
+# React [[routing|Router]]
+## setup
 to set up the router, you just have to import the router that matches your application type and then wrap your entire application in that router component like so:
 ```jsx
 import React from "react"
@@ -530,7 +534,7 @@ root.render(
   </React.StrictMode>
 )
 ```
-### defining routes
+## defining routes
 this is generally done at the top level of your application such as in the app component, but can be done anywhere you want. Observe:
 ```jsx
 import { Route, Routes } from "react-router-dom"
@@ -548,7 +552,7 @@ export function App() {
 ```
 Whenever your [[uniform resource locator (URL)]] changes, React Router will look at the routes defined in your `Routes` component and it will render the content in the `element` prop of the `Route` that has a `path` that matches the URL. In the above example if our URL was `/books` then the `BookList` component would be rendered.
 
-### handling navigation
+## handling navigation
 React uses it's own `<Link/>` component to handle navigation.
 ```jsx
 import { Route, Routes, Link } from "react-router-dom"
@@ -578,23 +582,23 @@ export function App() {
 }
 ```
 So now that there are link elements defined for each of the Route elements in the [[document object model (DOM)]], we we can access the routes that we have previously defined.
-#### `<Link/>` navigation
+### `<Link/>` navigation
 links can do absolute navigation or relative path navigation.
-##### props
+#### props
 - `replace`If you click on a link that goes to the `/books/3/edit` page but it has the `replace` property set to `true` your new history will look like this.
 - `reloadDocument` If it is set to `true` your `Link` component will act like a normal anchor tag and do a full page refresh on navigation instead of just re-rendering the content inside your `Routes` component.
 - `state` This prop lets you pass data along with your `Link` that does not show up anywhere in the [[uniform resource locator (URL)]].
-##### `NavLink`
+#### `NavLink`
 the navlink component works similar to the Link component except you
-#### manual navigation
+### manual navigation
 use the `useNavigate()` hook to assign a variable to a navigate function. then you can pass it data. refer to the docs for usage information.
-#### navigation data
+### navigation data
 You can pass data using
 1. dynamic parameters
 2. search parameters - this is all of hte data that comes after the `?` in a [[uniform resource locator (URL)]]. You can parse these using the `useSearchParams` hook with is very similar to the `useState` hook.
 3. state/location data - use the `useLocation` hook. This takes no parameters and returns a single object return value.
-### [[Advanced Routing with React]]
-#### 1. Dynamic Routing
+## [[Advanced Routing with React]]
+### 1. Dynamic Routing
 To create a dynamic route, do something like is shown in this example:
 ```jsx
 <Routes>
@@ -613,9 +617,9 @@ export function Book() {
 	return <h1>Book {id}</h1>
 }
 ```
-#### 2. Routing priority
+### 2. Routing priority
 Routing priority is an idea similar to [[polymorphism]] in that if we have dynamic routes and other routes that could match a dynamic route, it will take the one that is the most specific and apply that to the routing logic.
-#### 3. Nested routes
+### 3. Nested routes
 Nested routes allows you to put routes within routes, basically giving sub routes, kinda similar to the work you did with [[Java Spring Boot]] at texas instruments where you could have nested [[MVC (Model View Controller)|controllers]] that handled subroutes of larger controllers.
 
 > [!QUOTE]
@@ -659,7 +663,7 @@ export function BooksLayout() {
 Now this new code states that if we match on the `/book` route it will render the BooksLayout component which contains our shared navigation components.
 
 Thus the `element` property is super powerful because it allows the nested routing to get it's power.
-#### 4. Multiple routes
+### 4. Multiple routes
 ```jsx
 import { Route, Routes, Link } from "react-router-dom"
 import { Home } from "./Home"
@@ -693,7 +697,7 @@ export function App() {
 This code creates the main content of the page, but when we are on the `/books` route, we are also able to see the side bar `<BooksSideBar/>`  component.
 
 You can also move routes to their own file and import them as you would any other [[JavaScript XML (JSX)]] component.
-#### 5. `useRoutes` hook
+### 5. `useRoutes` hook
 Allows you to specify your routes using [[JavaScript]] over [[JavaScript XML (JSX)]] if your prefer. The JSX example is on top, and the JavaScript example is on bottom.
 ```jsx
 import { Route, Routes } from "react-router-dom"
@@ -739,7 +743,7 @@ export function App() {
 }
 ```
 
-#### Types of Routers
+### Types of Routers
 - BrowserRouter
 - NativeRouter
 - HashRouter
@@ -747,3 +751,190 @@ export function App() {
 - History Router
 - MemoryRouter - stores routing information directly in memory
 - StaticRouter - this is meant for server rendering since it takes a single location prop and renders that location prop as the URL. It simply renders a single static page.
+
+# Data and Authentication Services
+- storing files on your server is not a good idea because the server only has so much storage space and when you run out, the server will stop working properly
+- to upload files use the `multer` package from [[npm]]. Below are some code examples of how to upload files on the [[frontend]] and the [[backend]]
+## Storage services
+- [[S3 Bucket]] by [[Amazon Web Services (AWS)]] is the most popular storage system.
+	1. It has unlimited capacity
+	2. You only pay for the storage that you use
+	3. It is optimized for global access
+	4. It keeps multiple redundant copies of every file
+	5. You can version the files
+	6. It is performant
+	7. It supports metadata tags
+	8. You can make your files publicly available directly from S3
+	9. You can keep your files private and only accessible to your application
+## Data services
+- popular data services
+	- [[redis]]
+	- [[MySQL]]
+	- [[ElasticSearch]]
+	- [[MongoDB]]
+	- [[DynamoDB]]
+	- [[neo4j]]
+	- [[InfluxDB]]
+
+### MongoDB
+- Mongo has no strict schema requirements
+- A mongo database is made up of one or more collections that each contain [[JSON]] documents.
+- You can think of a collection as a large array of [[JavaScript]] objects, each with a unique ID.
+- here is an example of a mongo document structure
+```json
+[
+  {
+    _id: '62300f5316f7f58839c811de',
+    name: 'Lovely Loft',
+    summary: 'A charming loft in Paris',
+    beds: 1,
+    last_review: {
+      $date: '2022-03-15T04:06:17.766Z',
+    },
+    price: 3000,
+  },
+  {
+    _id: '623010b97f1fed0a2df311f8',
+    name: 'Infinite Views',
+    summary: 'Modern home with infinite views from the infinity pool',
+    property_type: 'House',
+    beds: 5,
+    price: 250,
+  },
+];
+```
+- Below is the query syntax for the above mongo example
+```js
+// find all houses
+db.house.find();
+
+// find houses with two or more bedrooms
+db.house.find({ beds: { $gte: 2 } });
+
+// find houses that are available with less than three beds
+db.house.find({ status: 'available', beds: { $lt: 3 } });
+
+// find houses with either less than three beds or less than $1000 a night
+db.house.find({ $or: [(beds: { $lt: 3 }), (price: { $lt: 1000 })] });
+
+// find houses with the text 'modern' or 'beach' in the summary
+db.house.find({ summary: /(modern|beach)/i });
+```
+- To use MongoDB in your [[JavaScript|js]] application, 
+```js
+const { MongoClient } = require('mongodb');
+
+const userName = 'holowaychuk';
+const password = 'express';
+const hostname = 'mongodb.com';
+
+const url = `mongodb+srv://${userName}:${password}@${hostname}`;
+
+const client = new MongoClient(url);
+
+const collection = client.db('rental').collection('house');
+
+const house = {
+  name: 'Beachfront views',
+  summary: 'From your bedroom to the beach, no shoes required',
+  property_type: 'Condo',
+  beds: 1,
+};
+await collection.insertOne(house);
+
+const cursor = collection.find();
+const rentals = await cursor.toArray();
+rentals.forEach((i) => console.log(i));
+/*
+OUTPUT:
+[
+  {
+    _id: new ObjectId('639a96398f8de594e198fc13'),
+    name: 'Beachfront views',
+    summary: 'From your bedroom to the beach, no shoes required',
+    property_type: 'Condo',
+    beds: 1,
+  },
+];
+*/
+```
+- You can provide a query and options to the `find` function. In the example below we query for a `property_type` of Condo that has less than two bedrooms. We also specify the options to sort by descending price, and limit our results to the first 10 documents.
+```js
+const query = { property_type: 'Condo', beds: { $lt: 2 } };
+
+const options = {
+  sort: { price: -1 },
+  limit: 10,
+};
+
+const cursor = collection.find(query, options);
+const rentals = await cursor.toArray();
+rentals.forEach((i) => console.log(i));
+```
+
+## Authorization Services
+- [[authentication]] tokens are usually stored as [[cookie]]s on a user's device.
+- authorization indicates what a user is allowed to do in the application.
+- the primary objective of hackers is authentication and authorization.
+- Common protocols for authentication and authorization:
+	- [[OAuth]]
+	- [[security assertion markup language (SAML)]]
+	- [[OpenID Connect (OIDC)]]
+- [[federated login]] allows a user to log in once and then the [[authentication]] token is reused to automatically log in the user to multiple websites. This is used with the suite of [[Google]] products like docs, calendar, photos and more.
+## Account creation and login
+### need an endpoint for creating a new user
+```http
+POST /api/auth/create HTTP/2
+Content-Type: application/json
+
+{
+	"email":"aarondstarkweather@gmail.com",
+	"password":"password",
+	"first-name":"aaron",
+	"last-name":"starkweather",
+}
+```
+response
+```http
+HTTP/2 200 OK
+Content-Type: application/json
+Set-Cookie: auth=tokenHere
+
+{
+	"id":"337
+}
+```
+### endpoint for logging user in
+```http
+POST /auth/login HTTP/2
+Content-Type: application/json
+
+{
+  "email":"marta@id.com",
+  "password":"toomanysecrets"
+}
+```
+response
+```http
+HTTP/2 200 OK
+Content-Type: application/json
+Set-Cookie: auth=tokenHere
+
+{
+  "id":"337"
+}
+```
+### endpoint for GetMe
+```http
+GET /user/me HTTP/2
+Cookie: auth=tokenHere
+```
+response
+```http
+HTTP/2 200 OK
+Content-Type: application/json
+
+{
+  "email":"marta@id.com"
+}
+```
