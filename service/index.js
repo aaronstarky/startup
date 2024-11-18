@@ -1,9 +1,10 @@
+const { MongoClient } = require('mongodb');
+const config = require('./dbConfig.json');
 const express = require('express');
 const uuid = require('uuid');
 const cors = require('cors');
-const app = express();
-const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
+const app = express();
 app.use(express.static('public'));
 
 const allowedOrigins = ['https://localhost:5173', 'https://startup.picklematch.click', '*', '0.0.0.0'];
@@ -26,6 +27,8 @@ class User {
     constructor(email, password) {
         this.email = email;
         this.password = password;
+        this.first_name = null;
+        this.last_name = null;
         this.token = null;
     }
 }
@@ -145,6 +148,8 @@ app.get('/weather', async (_req, res) => {
     res.send(data);
 });
 
+
+const port = process.argv.length > 2 ? process.argv[2] : 3000;
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
