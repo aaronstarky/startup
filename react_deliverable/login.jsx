@@ -5,7 +5,7 @@ export default function Login() {
     async function submitLoginRequest() {
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
-        const encodedUrl = encodeURI(`http://localhost:3000/api/auth/login/${email}/${password}`);
+        const encodedUrl = encodeURI(`/api/auth/login/${email}/${password}`);
         const response = await fetch(encodedUrl, {
             method: 'POST',
             headers: {
@@ -19,7 +19,7 @@ export default function Login() {
     async function submitRegisterRequest() {
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
-        const encodedUrl = encodeURI(`http://localhost:3000/api/auth/register/${email}/${password}`);
+        const encodedUrl = encodeURI(`/api/auth/register/${email}/${password}`);
         const response = await fetch(encodedUrl, {
             method: 'POST',
             headers: {

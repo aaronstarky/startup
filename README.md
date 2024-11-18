@@ -109,6 +109,11 @@ With this deliverable I created an Express.js backend for the application. This 
 	- [X] used weather API service to get the current weather so people can decide whether or not to play pickleball that day.
 
 ## DB/Login Deliverable
+- [ ] `npm install mongodb`
+- [ ] create MongoDB cluster
+- [ ] connect backend to MongoDB cluster
+- [ ] set up login credentials to be added to MongoDB cluster
+- [ ] set up document structure for match items to be inserted into MongoDB
 
 ## WebSocket Deliverable
 
