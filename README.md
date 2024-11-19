@@ -111,9 +111,10 @@ With this deliverable I created an Express.js backend for the application. This 
 ## DB/Login Deliverable
 - [X] `npm install mongodb`
 - [X] create MongoDB cluster
-- [ ] connect backend to MongoDB cluster
-- [ ] set up login credentials to be added to MongoDB cluster
-- [ ] set up document structure for match items to be inserted into MongoDB
+- [X] connect backend to MongoDB cluster
+- [X] set up login credentials to be added to MongoDB cluster
+- [X] set up document structure for match items to be inserted into MongoDB
+- [ ] change all existing authentication endpoints to use the new MongoDB format
 
 ## WebSocket Deliverable
 
