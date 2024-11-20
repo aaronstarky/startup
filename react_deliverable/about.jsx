@@ -25,7 +25,7 @@ export default function About() {
         <div className="component">
             <h1>Welcome to PaddleMatch!</h1>
             <p className="weather">{temperature} and {description}</p>
-            <p>
+            <div>
                 I can't wait for you to enjoy a simple but fun pickleball experience using PaddleMatch. Here are a couple places to get started:
                 <ul>
                     <li>
@@ -39,7 +39,7 @@ export default function About() {
                     </li>
                 </ul>
                 I hope you enjoy :)
-            </p>
+            </div>
 
         </div>
     )
