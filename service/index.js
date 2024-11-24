@@ -29,8 +29,6 @@ app.use(`/api`, apiRouter);
 
 
 // AUTH //////////////////////////////////////////////////////////////////
-let users = {};
-let tokens = new Set();
 class User {
     constructor(email, password) {
         this.email = email;
@@ -40,45 +38,9 @@ class User {
         this.token = null;
     }
 }
-// REGISTER
-apiRouter.post('/auth/register/:email/:password', async (req, res) => {
-    console.log("/api/auth/register");
-    if (await getUser(req.params.email)) {
-        res.status(409).send({ msg: 'User already exists' });
-        return;
-    }
-    const user = await createUser(req.params.email, req.params.password);
-    setAuthCookie(res, user.token);
-    res.send({ id: user._id });
-    // users[req.params.email] = new User(req.params.email, req.params.password);
-    // res.send({ msg: 'User created' });
-});
-// LOGIN
-apiRouter.post('/auth/login/:email/:password', async (req, res) => {
-    console.log("/api/auth/login");
-    const user = users[req.params.email];
-    if (user) {
-        if (req.params.password === user.password) {
-            user.token = uuid.v4();
-            tokens.add(user.token);
-            res.send({ token: user.token });
-            return;
-        }
-    }
-    res.status(401).send({ msg: 'Unauthorized' });
-});
-// VERIFY
-apiRouter.post('/auth/verify/:token', async (req, res) => {
-    console.log("/api/auth/verify");
-    if (tokens.has(req.params.token)) {
-        res.status(200).send({ msg: 'Authorized' });
-        return;
-    }
-    res.status(401).send({ msg: 'Unauthorized' });
-});
 // CREATE USER PROFILE //////////////////////////////////////////////////
 app.post('/auth/create', async (req, res) => {
-    console.log("/auth/create");W
+    console.log("/auth/create");
     if (await getUser(req.body.email)) {
         res.status(409).send({ msg: 'User already exists' });
         return;
