@@ -33,17 +33,22 @@ app.use(`/api`, apiRouter);
 // CREATE USER PROFILE //////////////////////////////////////////////////
 app.post('/api/auth/create', async (req, res) => {
     console.log("/auth/create");
-    if (await getUser(req.body.email)) {
-        res.status(409).send({ msg: 'User already exists' });
-        console.log("User already exists");
-        return;
+    try {
+        if (await getUser(req.body.email)) {
+            res.status(409).send({ msg: 'User already exists' });
+            console.log("User already exists");
+            return;
+        }
+        const user = await createUser(req.body.email, req.body.password);
+        setAuthCookie(res, user.token);
+        res.send({
+            id: user._id,
+        });
+        console.log("User created");
+    } catch (error) {
+        console.error('Error creating user:', error);
+        res.status(500).send({ msg: 'Error creating user' });
     }
-    const user = await createUser(req.body.email, req.body.password);
-    setAuthCookie(res, user.token);
-    res.send({
-        id: user._id,
-    });
-    console.log("User created");
 });
 
 function setAuthCookie(res, token) {
@@ -55,17 +60,23 @@ function setAuthCookie(res, token) {
 }
 
 app.post('/api/auth/login', async (req, res) => {
-    const user = await getUser(req.body.email);
-    if (!user || !(await bcrypt.compare(req.body.password, user.password))) {
-        res.status(401).send({ msg: 'Unauthorized' });
-        console.log("Unauthorized");
-        return;
-    }
-    setAuthCookie(res, user.token);
-    res.send({
-        id: user._id,
-    });
-    console.log("User logged in");
+    try {
+        const user = await getUser(req.body.email);
+        console.log(user);
+        if (!user || !(await bcrypt.compare(req.body.password, user.password))) {
+            res.status(401).send({ msg: 'Unauthorized' });
+            console.log("Unauthorized");
+            return;
+        }
+        setAuthCookie(res, user.token);
+        res.send({
+            id: user._id,
+        });
+        console.log("User logged in");
+    } catch (error) {
+        console.error('Error logging in:', error);
+        res.status(500).send({ msg: 'Error logging in' });
+    }   
 });
 
 app.get('/api/user/me', async (req, res) => {
@@ -175,8 +186,9 @@ app.get('/', (_req, res) => {
 
 app.get('/weather', async (_req, res) => {
     console.log("/weather");
-    const response = await fetch('https://goweather.herokuapp.com/weather/Denver');
+    const response = await fetch('http://goweather.herokuapp.com/weather/Denver');
     const data = await response.json();
+    console.log(data);
     res.send(data);
 });
 // MONGO FUNCTIONS //////////////////////////////////////////////////////

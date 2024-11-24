@@ -5,6 +5,7 @@ export default function Login() {
     const navigate = useNavigate();
 
     async function submitLoginRequest() {
+        console.log("submitLoginRequest");
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
         const encodedUrl = encodeURI(`/api/auth/login`);
@@ -21,6 +22,7 @@ export default function Login() {
     }
 
     async function submitRegisterRequest() {
+        console.log("submitRegisterRequest");
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
         const encodedUrl = encodeURI(`/api/auth/create`);

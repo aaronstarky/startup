@@ -5,6 +5,7 @@ import './matchesStyles.css';
 
 export default function Matches() {
     const [matches, setMatches] = useState([]);
+    const [matchesLoaded, setMatchesLoaded] = useState(false);
     const navigate = useNavigate();
     const id = localStorage.getItem('id');
     const email = localStorage.getItem('email');
@@ -18,6 +19,7 @@ export default function Matches() {
     }, [id, navigate]);
 
     async function getMatches() {
+        setMatchesLoaded(false);
         try {
             const encodedUrl = encodeURI(`/api/match/${email}`);
             const response = await fetch(encodedUrl, {
@@ -29,6 +31,7 @@ export default function Matches() {
             const data = await response.json();
             setMatches(data.matches);
             console.log(data.matches);
+            setMatchesLoaded(true);
         } catch (error) {
             console.error('Error fetching matches:', error);
         }
@@ -41,16 +44,24 @@ export default function Matches() {
         <div>
             <h1>Matches</h1>
             <div className="match-list">
-                {matches.map((match, index) => (
-                    <Match
-                        key={index}
-                        player1={match.player1}
-                        player2={match.player2}
-                        player1Score={match.score1}
-                        player2Score={match.score2}
-                        date={match.date}
-                    />
-                ))}
+                { !matchesLoaded && 
+                    <h1>Loading...</h1>
+                }
+                { matchesLoaded && 
+                    <>
+                        {matches.map((match, index) => (
+                            <Match
+                                key={index}
+                                player1={match.player1}
+                                player2={match.player2}
+                                player1Score={match.score1}
+                                player2Score={match.score2}
+                                date={match.date}
+                            />
+                        ))}
+                    </>
+                }
+                
             </div>
         </div>
     );
