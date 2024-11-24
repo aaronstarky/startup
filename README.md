@@ -114,7 +114,8 @@ With this deliverable I created an Express.js backend for the application. This 
 - [X] connect backend to MongoDB cluster
 - [X] set up login credentials to be added to MongoDB cluster
 - [X] set up document structure for match items to be inserted into MongoDB
-- [ ] change all existing authentication endpoints to use the new MongoDB format
+- [X] change all existing authentication endpoints to use the new MongoDB format
+- [ ] edit existing login fetch requests to fetch from the new auth endpoints
 
 ## WebSocket Deliverable
 

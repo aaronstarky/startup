@@ -6,16 +6,16 @@ import './matchesStyles.css';
 export default function Matches() {
     const [matches, setMatches] = useState([]);
     const navigate = useNavigate();
-    const token = localStorage.getItem('token');
+    const id = localStorage.getItem('id');
     const email = localStorage.getItem('email');
 
     useEffect(() => {
-        if (!token) {
-            navigate('/login'); // Redirect to login page if no token
+        if (!id) {
+            navigate('/login'); // Redirect to login page if no id
         } else {
             getMatches();
         }
-    }, [token, navigate]);
+    }, [id, navigate]);
 
     async function getMatches() {
         try {
@@ -33,7 +33,7 @@ export default function Matches() {
             console.error('Error fetching matches:', error);
         }
     }
-    if (!token) {
+    if (!id) {
         return <h1>Log in to access matches.</h1>;
     }
 

@@ -7,6 +7,7 @@
     border-style: solid;
     text-decoration: none;
     border-color: #ffffff;
+    background: none;
 }
 
 .header-link:hover {

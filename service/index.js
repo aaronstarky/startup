@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt');
 const express = require('express');
 const uuid = require('uuid');
 const cors = require('cors');
-const allowedOrigins = ['https://localhost:5173', 'https://startup.picklematch.click', '*', '0.0.0.0'];
+const allowedOrigins = ['https://localhost:5173', 'https://startup.picklematch.click', '*', '0.0.0.0', 'http://localhost:5173'];
 const connection_str = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}/?retryWrites=true&w=majority&appName=startup-cluster`;
 const client = new MongoClient(connection_str);
 
@@ -19,6 +19,7 @@ app.use(cors({
     origin: function (origin, callback) {
         if (!origin) return callback(null, true);
         if (allowedOrigins.indexOf(origin) === -1) {
+            console.log(origin);
             return callback(new Error('CORS policy violation'), false);
         }
         return callback(null, true);
@@ -29,20 +30,12 @@ app.use(`/api`, apiRouter);
 
 
 // AUTH //////////////////////////////////////////////////////////////////
-class User {
-    constructor(email, password) {
-        this.email = email;
-        this.password = password;
-        this.first_name = null;
-        this.last_name = null;
-        this.token = null;
-    }
-}
 // CREATE USER PROFILE //////////////////////////////////////////////////
-app.post('/auth/create', async (req, res) => {
+app.post('/api/auth/create', async (req, res) => {
     console.log("/auth/create");
     if (await getUser(req.body.email)) {
         res.status(409).send({ msg: 'User already exists' });
+        console.log("User already exists");
         return;
     }
     const user = await createUser(req.body.email, req.body.password);
@@ -50,6 +43,7 @@ app.post('/auth/create', async (req, res) => {
     res.send({
         id: user._id,
     });
+    console.log("User created");
 });
 
 function setAuthCookie(res, token) {
@@ -60,19 +54,21 @@ function setAuthCookie(res, token) {
     });
 }
 
-app.post('/auth/login', async (req, res) => {
+app.post('/api/auth/login', async (req, res) => {
     const user = await getUser(req.body.email);
     if (!user || !(await bcrypt.compare(req.body.password, user.password))) {
         res.status(401).send({ msg: 'Unauthorized' });
+        console.log("Unauthorized");
         return;
     }
     setAuthCookie(res, user.token);
     res.send({
         id: user._id,
     });
+    console.log("User logged in");
 });
 
-app.get('/user/me', async (req, res) => {
+app.get('/api/user/me', async (req, res) => {
     const authToken = req.cookies['token'];
     const user = await client.db('paddlematch').collection('users').findOne({ token: authToken });
     if (!user) {
@@ -100,9 +96,9 @@ class Match {
 // SUBMIT MATCH
 apiRouter.post('/match/submit/:uuid', async (req, res) => {
     console.log("/api/match/submit");
-    const match = matches[req.params.uuid];
+    const match = client.db('paddlematch').collection('matches').findOne({ uuid: req.params.uuid });
     if (match) {
-        matches[req.params.uuid].live = false;
+        client.db('paddlematch').collection('matches').updateOne({ uuid: req.params.uuid }, { $set: { live: false } });
         res.status(200).send({ msg: 'Match submitted successfully' });
         return;
     }
@@ -112,49 +108,65 @@ apiRouter.post('/match/submit/:uuid', async (req, res) => {
 // GET MATCHES FOR USER
 apiRouter.post('/match/:user_id', async (_req, res) => {
     console.log("/api/match/:user_id");
-    let user_matches = [];
-    for (const [match_id, match] of Object.entries(matches)) {
-        if (match.player1 === _req.params.user_id || match.player2 === _req.params.user_id) {
-            user_matches.push(match);
-        }
+    try {
+        const user_matches = await client.db('paddlematch').collection('matches').find({
+            $or: [
+                { player1: _req.params.user_id },
+                { player2: _req.params.user_id }
+            ]
+        }).toArray(); 
+        res.status(200).send({
+            matches: user_matches
+        });
+        return;
+    } catch (error) {
+        console.error('Error fetching matches:', error);
+        res.status(500).send({ msg: 'Error fetching matches' });
+        return;
     }
-    res.status(200).send({
-        matches: user_matches
-    });
-    return;
 });
 // GET MATCH BY ID
 apiRouter.post('/match/get/:match_id', async (_req, res) => {
     console.log("/api/match/get/:match_id");
-    const match = matches[_req.params.match_id];
-    if (match) {
-        res.status(200).send({
-            matches: [match]
-        });
+    try {
+        const match = await client.db('paddlematch').collection('matches').findOne({ uuid: _req.params.match_id });
+        if (match) {
+            res.status(200).send({ matches: [match] });
+            return;
+        }
+        res.status(400).send({ msg: 'Match not found' });
+    } catch (error) {
+        console.error('Error fetching match:', error);
+        res.status(500).send({ msg: 'Error fetching match' });
         return;
     }
-    res.status(400).send({ msg: 'Match not found' });
 });
 // START MATCH
 apiRouter.post('/match/start/:player1/:player2/:score1/:score2', async (_req, res) => {
     console.log("/api/match/start/:player1/:player2/:score1/:score2");
     const match = new Match(_req.params.player1, _req.params.player2, _req.params.score1, _req.params.score2);
-    matches[match.uuid] = match;
+    try {
+        await client.db('paddlematch').collection('matches').insertOne(match);
+    } catch (error) {
+        console.error('Error inserting match:', error);
+        res.status(500).send({ msg: 'Error inserting match' });
+        return;
+    }
     res.status(200).send({ msg: 'Match started', match_id: match.uuid });
     return;
 });
 // UPDATE SCORE
 apiRouter.post('/match/update/:match_id/:score1/:score2', async (req, res) => {
     console.log("/api/match/update/:match_id/:score1/:score2");
-    let match = matches[req.params.match_id];
-    console.log(req.params.match_id, req.params.score1, req.params.score2);
-    if (match) {
-        const newMatch = new Match(match.player1, match.player2, req.params.score1, req.params.score2);
-        matches[req.params.match_id] = newMatch;
+    try {
+        client.db('paddlematch').collection('matches').updateOne({ uuid: req.params.match_id }, { $set: { score1: req.params.score1, score2: req.params.score2 } });
         res.status(200).send({ msg: 'Score updated' });
         return;
+    } catch (error) {
+        console.error('Error updating match:', error);
+        res.status(500).send({ msg: 'Error updating match' });
+        return;
     }
-    res.status(401).send({ msg: 'Cannot find match to update' });
 });
 // DEFAULT ///////////////////////////////////////////////////////////////
 app.get('/', (_req, res) => {
