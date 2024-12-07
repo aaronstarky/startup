@@ -47,9 +47,6 @@ export default function Matches() {
             console.error('Error fetching matches:', error);
         }
     }
-    if (!id) {
-        return <h1>Log in to access matches.</h1>;
-    }
 
     return (
         <div>
