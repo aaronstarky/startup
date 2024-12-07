@@ -52,10 +52,10 @@ export default function Matches() {
             <h1>Live Matches</h1>
             <div className='match-list'>
                 {!matchesLoaded &&
-                    <h1>Loading live matches...</h1>
+                    <h5>Loading live matches...</h5>
                 }
                 {matchesLoaded && liveMatches.length === 0 &&
-                    <h1>No live matches found</h1>
+                    <h5>No live matches found</h5>
                 }
                 {matchesLoaded &&
                     <>
@@ -75,10 +75,10 @@ export default function Matches() {
             <h1>Past Matches</h1>
             <div className="match-list">
                 {!matchesLoaded &&
-                    <h1>Loading past matches...</h1>
+                    <h5>Loading past matches...</h5>
                 }
                 {matchesLoaded && matches.length === 0 &&
-                    <h1>No past matches found</h1>
+                    <h5>No past matches found</h5>
                 }
                 {matchesLoaded &&
                     <>
