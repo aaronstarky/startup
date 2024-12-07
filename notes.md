@@ -1008,3 +1008,159 @@ socket.send('I am listening');
 ```
 
 3. In the browser you will get a message that the server heard you say 'I am listening'
+
+# WebSocket chat
+- Create [[HTML]] page that looks like this "index.html"
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebSocket Chat</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <div class="name">
+      <fieldset id="name-controls">
+        <legend>My Name</legend>
+        <input id="my-name" type="text" />
+      </fieldset>
+    </div>
+
+    <fieldset id="chat-controls" disabled>
+      <legend>Chat</legend>
+      <input id="new-msg" type="text" />
+      <button onclick="sendMessage()">Send</button>
+    </fieldset>
+    <div id="chat-text"></div>
+  </body>
+  <script src="chatClient.js"></script>
+</html>
+```
+- create `chatClient.js` and paste in the following code
+```js
+// Adjust the webSocket protocol to what is being used for HTTP
+const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+
+// Display that we have opened the webSocket
+socket.onopen = (event) => {
+  appendMsg('system', 'websocket', 'connected');
+};
+
+// Display messages we receive from our friends
+socket.onmessage = async (event) => {
+  const text = await event.data.text();
+  const chat = JSON.parse(text);
+  appendMsg('friend', chat.name, chat.msg);
+};
+
+// If the webSocket is closed then disable the interface
+socket.onclose = (event) => {
+  appendMsg('system', 'websocket', 'disconnected');
+  document.querySelector('#name-controls').disabled = true;
+  document.querySelector('#chat-controls').disabled = true;
+};
+
+// Send a message over the webSocket
+function sendMessage() {
+  const msgEl = document.querySelector('#new-msg');
+  const msg = msgEl.value;
+  if (!!msg) {
+    appendMsg('me', 'me', msg);
+    const name = document.querySelector('#my-name').value;
+    socket.send(`{"name":"${name}", "msg":"${msg}"}`);
+    msgEl.value = '';
+  }
+}
+
+// Create one long list of messages
+function appendMsg(cls, from, msg) {
+  const chatText = document.querySelector('#chat-text');
+  const chatEl = document.createElement('div');
+  chatEl.innerHTML = `<span class="${cls}">${from}</span>: ${msg}</div>`;
+  chatText.prepend(chatEl);
+}
+
+// Send message on enter keystroke
+const input = document.querySelector('#new-msg');
+input.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    sendMessage();
+  }
+});
+
+// Disable chat if no name provided
+const chatControls = document.querySelector('#chat-controls');
+const myName = document.querySelector('#my-name');
+myName.addEventListener('keyup', (e) => {
+  chatControls.disabled = myName.value === '';
+});
+```
+- create an [[Express.js]] backend server with the following code
+```js
+const { WebSocketServer } = require('ws');
+const express = require('express');
+const app = express();
+// Serve up our webSocket client HTML
+app.use(express.static('./public'));
+const port = process.argv.length > 2 ? process.argv[2] : 3000;
+server = app.listen(port, () => {
+  console.log(`Listening on ${port}`);
+});
+
+// Create a websocket object
+const wss = new WebSocketServer({ noServer: true });
+
+// Handle the protocol upgrade from HTTP to WebSocket
+server.on('upgrade', (request, socket, head) => {
+  wss.handleUpgrade(request, socket, head, function done(ws) {
+    wss.emit('connection', ws, request);
+  });
+});
+
+// Keep track of all the connections so we can forward messages
+let connections = [];
+let id = 0;
+
+wss.on('connection', (ws) => {
+  const connection = { id: ++id, alive: true, ws: ws };
+  connections.push(connection);
+  // Forward messages to everyone except the sender
+  ws.on('message', function message(data) {
+    connections.forEach((c) => {
+      if (c.id !== connection.id) {
+        c.ws.send(data);
+      }
+    });
+  });
+  // Remove the closed connection so we don't try to forward anymore
+  ws.on('close', () => {
+    const pos = connections.findIndex((o, i) => o.id === connection.id);
+    if (pos >= 0) {
+      connections.splice(pos, 1);
+    }
+  });
+  // Respond to pong messages by marking the connection alive
+  ws.on('pong', () => 
+    connection.alive = true;
+  });
+});
+
+// Keep active connections alive
+setInterval(() => {
+  connections.forEach((c) => {
+    // Kill any connection that didn't respond to the ping last time
+    if (!c.alive) {
+      c.ws.terminate();
+    } else {
+      c.alive = false;
+      c.ws.ping();
+    }
+  });
+}, 10000);
+```
+- Instead of letting the WebSocketServer control both the [[HTTP]] connection and the upgrading to [[WebSocket]], we want to use the [[HTTP]] connection that [[Express.js]] is providing and handle the upgrade to WebSocket ourselves. This is done by specifying the `noServer` option when creating the WebSocketServer and then handling the `upgrade` notification that occurs when a client requests the upgrade of the protocol from HTTP to WebSocket.
+## How to exploit the innerHTML code
+To exploit the code that the client is executing in the client, type a message in the chat box, but include an `onclick` attribute in the [[HTML]] that you pass into the chat box. Then when you click the message, the event will trigger and you will have your code executing in the browser. However, I cannot get these messages to come through for the other user. Maybe it isn't possible.
