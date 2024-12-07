@@ -5,6 +5,7 @@ import './matchesStyles.css';
 
 export default function Matches() {
     const [matches, setMatches] = useState([]);
+    const [liveMatches, setLiveMatches] = useState([]);
     const [matchesLoaded, setMatchesLoaded] = useState(false);
     const navigate = useNavigate();
     const id = localStorage.getItem('id');
@@ -14,6 +15,7 @@ export default function Matches() {
         if (!id) {
             navigate('/login'); // Redirect to login page if no id
         } else {
+            getLiveMatches();
             getMatches();
         }
     }, [id, navigate]);
@@ -29,8 +31,17 @@ export default function Matches() {
                 },
             });
             const data = await response.json();
-            setMatches(data.matches);
-            console.log(data.matches);
+            let liveMatches = [];
+            let pastMatches = [];
+            for (let i = 0; i < data.matches.length; i++) {
+                if (data.matches[i].live) {
+                    liveMatches.push(data.matches[i]);
+                    continue;
+                }
+                pastMatches.push(data.matches[i]);
+            }
+            setLiveMatches(liveMatches);
+            setMatches(pastMatches);
             setMatchesLoaded(true);
         } catch (error) {
             console.error('Error fetching matches:', error);
@@ -42,12 +53,16 @@ export default function Matches() {
 
     return (
         <div>
-            <h1>Matches</h1>
+            <h1>Live Matches</h1>
+            <div className='match-list'>
+
+            </div>
+            <h1>Past Matches</h1>
             <div className="match-list">
-                { !matchesLoaded && 
+                {!matchesLoaded &&
                     <h1>Loading...</h1>
                 }
-                { matchesLoaded && 
+                {matchesLoaded &&
                     <>
                         {matches.map((match, index) => (
                             <Match
@@ -61,7 +76,7 @@ export default function Matches() {
                         ))}
                     </>
                 }
-                
+
             </div>
         </div>
     );
