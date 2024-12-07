@@ -115,7 +115,11 @@ With this deliverable I created an Express.js backend for the application. This 
 - [X] set up login credentials to be added to MongoDB cluster
 - [X] set up document structure for match items to be inserted into MongoDB
 - [X] change all existing authentication endpoints to use the new MongoDB format
-- [ ] edit existing login fetch requests to fetch from the new auth endpoints
+- [X] edit existing login fetch requests to fetch from the new auth endpoints
 
 ## WebSocket Deliverable
+For this deliverable, I am going to set up a websocket server that users connect to each time they view the matches page. On the matches page, they can view the scores of matches in which they are participating update in real time.
 
+- [X] Properly deploy simon deliverable to simon.Picklematch.click
+- [ ] Create websocket endpoints in index.js
+- [ ] Connect matches page to websocket endpoint in index.js
