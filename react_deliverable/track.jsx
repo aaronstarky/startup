@@ -10,6 +10,13 @@ export default function Track() {
     let [initial, updateInitial] = React.useState(true);
     const navigate = useNavigate();
 
+    const ws = new WebSocket('/ws');
+
+    ws.onmessage = function (event) {  
+        const data = JSON.parse(event.data);
+        console.log("received: ", data);
+    }
+
     if (initial) {
         const encodedUrl = encodeURI(`/api/match/get/${localStorage.getItem("matchId")}`);
         fetch(encodedUrl, {
@@ -37,11 +44,10 @@ export default function Track() {
             },
         });
         if (response.status === 200) {
+            ws.send(`{"matchId": "${localStorage.getItem("matchId")}", "team1Score": ${team1Score}, "team2Score": ${team2Score}}`);
             return;
         }
-        else {
-            alert("Error updating score");
-        }
+        alert("Error updating score");
     }
 
     async function submitFinalScore() {
@@ -60,11 +66,11 @@ export default function Track() {
     }
 
     async function checkWinner() {
-        if (team1Score >= 11 && team1Score - team2Score >= 2) {
+        if (team1Score > 10 && team1Score - team2Score >= 2) {
             alert("Team 1 wins!");
             await submitFinalScore();
             return true;
-        } else if (team2Score >= 11 && team2Score - team1Score >= 2) {
+        } else if (team2Score > 10 && team2Score - team1Score >= 2) {
             alert("Team 2 wins!");
             await submitFinalScore();
             return true;
@@ -92,7 +98,7 @@ export default function Track() {
             updateTeam1Score(team1Score - 1);
         } else {
             if (team2Score != 0)
-                updateTeam2Score(team2Score - 1);
+            updateTeam2Score(team2Score - 1);
         }
         await sendScoreUpdate(team1Score, team2Score);
     }
