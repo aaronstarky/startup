@@ -52,12 +52,28 @@ export default function Matches() {
         <div>
             <h1>Live Matches</h1>
             <div className='match-list'>
-
+                {!matchesLoaded &&
+                    <h1>Loading live matches...</h1>
+                }
+                {matchesLoaded &&
+                    <>
+                        {liveMatches.map((match, index) => (
+                            <Match
+                                key={index}
+                                player1={match.player1}
+                                player2={match.player2}
+                                player1Score={match.score1}
+                                player2Score={match.score2}
+                                date={match.date}
+                            />
+                        ))}
+                    </>
+                }
             </div>
             <h1>Past Matches</h1>
             <div className="match-list">
                 {!matchesLoaded &&
-                    <h1>Loading...</h1>
+                    <h1>Loading past matches...</h1>
                 }
                 {matchesLoaded &&
                     <>
