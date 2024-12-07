@@ -10,6 +10,7 @@ const cors = require('cors');
 const allowedOrigins = ['https://localhost:5173', 'https://startup.picklematch.click', '*', '0.0.0.0', 'http://localhost:5173'];
 const connection_str = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}/?retryWrites=true&w=majority&appName=startup-cluster`;
 const client = new MongoClient(connection_str);
+const { peerProxy } = require('./peerProxy');
 
 const app = express();
 app.use(express.static('public'));
@@ -210,6 +211,8 @@ async function createUser(email, password) {
 }
 // FINALLY BEGIN THE SERVER /////////////////////////////////////////////
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
-app.listen(port, () => {
+const httpService = app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
+
+peerProxy(httpService);
