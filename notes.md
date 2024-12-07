@@ -5,16 +5,10 @@ Merge conflicts occur when the same line of code is edited in two different plac
 
 Times it can occur:
 - you make change to line 27. Line 27 has new change in github and you attempt to pull that change onto your local machine.
-
-  
-
 ## HTML
 - Use developer tools to inspect elements on a live webpage
 - developer elements are not saved, they are stored client side so you will not be able to see the changes that you have made between refreshes of the webpage
 - a [[bash]] script is used to deploy your web files to the live server.
-
-  
-
 ## History of Web Programming
 There are three main phases:
 1. Formation of internet
@@ -938,3 +932,79 @@ Content-Type: application/json
   "email":"marta@id.com"
 }
 ```
+
+# [[WebSocket]]
+- polling was a technique used to bypass the [[HTTP]] architecture.
+- in 2011, [[websocket]] was introduced with its main feature being that it is [[full-duplex]], much like [[socket]]s as you learned about in CS 324.
+- For multiple parties communicating with each other, the server still acts as an intermediary.
+![[multiple_clients_websocket.png]]
+## How to create a websocket on the client
+1. Create a WebSocket object by specifying the port you want to communicate on.
+2. Send messages with the `send` function
+3. Register a callback with the `onmessage` function $\rightarrow$ *this is synonymous to a `recv` call or a `read` call being placed in a while loop in a [[C]] program*
+
+```js
+const socket = new WebSocket('ws://localhost:9900');
+
+socket.onmessage = (event) => {
+  console.log('received: ', event.data);
+};
+
+socket.send('I am listening');
+```
+## How to create websocket server on the server
+1. use the [[ws]] package to create a WebSocketServer object on the same port the browser entity is trying to connect to
+2. Create a `wss.on('connection', (ws) => {})` handler so that your websocket server knows what to do when a connection request is received from a client
+3. Send messages to the clients with the `send` function
+4. Register an `on('message')` function.
+
+```js
+const { WebSocketServer } = require('ws');
+
+const wss = new WebSocketServer({ port: 9900 });
+
+wss.on('connection', (ws) => {
+  ws.on('message', (data) => {
+    const msg = String.fromCharCode(...data);
+    console.log('received: %s', msg);
+
+    ws.send(`I heard you say "${msg}"`);
+  });
+
+  ws.send('Hello webSocket');
+});
+```
+
+# Debugging websocket
+1. Create a simple websocket server using this code
+
+```js
+const { WebSocketServer } = require('ws');
+
+const wss = new WebSocketServer({ port: 9900 });
+
+wss.on('connection', (ws) => {
+  ws.on('message', (data) => {
+    const msg = String.fromCharCode(...data);
+    console.log('received: %s', msg);
+
+    ws.send(`I heard you say "${msg}"`);
+  });
+
+  ws.send('Hello webSocket');
+});
+```
+
+2. Run the server in vscode
+
+```js
+const socket = new WebSocket('ws://localhost:9900');
+
+socket.onmessage = (event) => {
+  console.log('received: ', event.data);
+};
+
+socket.send('I am listening');
+```
+
+3. In the browser you will get a message that the server heard you say 'I am listening'
