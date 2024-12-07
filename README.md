@@ -123,6 +123,6 @@ For this deliverable, I am going to set up a websocket server that users connect
 - [X] Properly deploy simon deliverable to simon.Picklematch.click
 - [ ] Create websocket endpoints in index.js
 - [ ] Connect matches page to websocket endpoint in index.js
-- [ ] Add UI changes to Matches screen
-	- [ ] add area for live matches to display
-	- [ ] increase gap between elements within match cards
+- [X] Add UI changes to Matches screen
+	- [X] add area for live matches to display
+	- [X] increase gap between elements within match cards

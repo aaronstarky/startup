@@ -15,7 +15,6 @@ export default function Matches() {
         if (!id) {
             navigate('/login'); // Redirect to login page if no id
         } else {
-            getLiveMatches();
             getMatches();
         }
     }, [id, navigate]);
@@ -55,6 +54,9 @@ export default function Matches() {
                 {!matchesLoaded &&
                     <h1>Loading live matches...</h1>
                 }
+                {matchesLoaded && liveMatches.length === 0 &&
+                    <h1>No live matches found</h1>
+                }
                 {matchesLoaded &&
                     <>
                         {liveMatches.map((match, index) => (
@@ -74,6 +76,9 @@ export default function Matches() {
             <div className="match-list">
                 {!matchesLoaded &&
                     <h1>Loading past matches...</h1>
+                }
+                {matchesLoaded && matches.length === 0 &&
+                    <h1>No past matches found</h1>
                 }
                 {matchesLoaded &&
                     <>
