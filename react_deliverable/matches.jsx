@@ -14,20 +14,24 @@ export default function Matches() {
     const ws = new WebSocket('/ws');
     ws.onmessage = function message(data) { 
         console.log(`Websocket message received`);
-        console.log(data);
-        try {
-            const jsonData = JSON.parse(data.data);
-            for (match of liveMatches) {
-                if (match.id === jsonData.matchId) {
-                    match.score1 = jsonData.team1Score;
-                    match.score2 = jsonData.team2Score;
-                    setLiveMatches([...liveMatches]);
-                    return;
+        const reader = new FileReader();
+        reader.onload = function() {
+            try {
+                const jsonData = JSON.parse(reader.result);
+                const newLiveMatches = [...liveMatches];
+                for (let i = 0; i < newLiveMatches.length; i++) {
+                    if (newLiveMatches[i].id === jsonData.matchId) {
+                        newLiveMatches[i].score1 = jsonData.team1Score;
+                        newLiveMatches[i].score2 = jsonData.team2Score;
+                        setLiveMatches(newLiveMatches);
+                        return;
+                    }
                 }
+            } catch (error) {
+                console.error('Error parsing websocket message:', error);
             }
-        } catch (error) {
-            console.error('Error parsing websocket message:', error);
-        }
+        };
+        reader.readAsText(data.data);
     };
 
 
