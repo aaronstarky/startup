@@ -10,7 +10,6 @@ export default function Track() {
     let [initial, updateInitial] = React.useState(true);
     const navigate = useNavigate();
 
-    // const ws = new WebSocket('http://localhost:3000/ws');
     const ws = new WebSocket('/ws');
 
     ws.onmessage = function message(data) {
@@ -36,7 +35,6 @@ export default function Track() {
 
     async function sendScoreUpdate(t1Score, t2Score) {
         console.log("scores", t1Score, t2Score);
-        // ws.send(JSON.stringify({ matchId: localStorage.getItem("matchId"), t1Score, t2Score }));
         const encodedUrl = encodeURI(`/api/match/update/${localStorage.getItem("matchId")}/${t1Score}/${t2Score}`);
         console.log(encodedUrl);
         const response = await fetch(encodedUrl, {
