@@ -24,7 +24,10 @@ export default function Matches() {
                     setLiveMatches(prevLiveMatches => {
                         const newLiveMatches = prevLiveMatches.map(match => {
                             if (match.uuid === jsonData.matchId) {
-                                return { ...match, score1: jsonData.team1Score, score2: jsonData.team2Score };
+                                console.log("Updating match score");
+                                console.log("t1Score: ", jsonData.t1Score);
+                                console.log("t2Score: ", jsonData.t2Score);
+                                return { ...match, score1: jsonData.t1Score, score2: jsonData.t2Score };
                             }
                             return match;
                         });
