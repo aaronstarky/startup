@@ -34,8 +34,10 @@ export default function Track() {
     }
 
 
-    async function sendScoreUpdate(team1Score, team2Score) {
-        const encodedUrl = encodeURI(`/api/match/update/${localStorage.getItem("matchId")}/${team1Score}/${team2Score}`);
+    async function sendScoreUpdate(t1Score, t2Score) {
+        console.log("scores", t1Score, t2Score);
+        // ws.send(JSON.stringify({ matchId: localStorage.getItem("matchId"), t1Score, t2Score }));
+        const encodedUrl = encodeURI(`/api/match/update/${localStorage.getItem("matchId")}/${t1Score}/${t2Score}`);
         console.log(encodedUrl);
         const response = await fetch(encodedUrl, {
             method: 'POST',
@@ -44,7 +46,7 @@ export default function Track() {
             },
         });
         if (response.status === 200) {
-            ws.send(JSON.stringify({ matchId: localStorage.getItem("matchId"), team1Score, team2Score }));
+            ws.send(JSON.stringify({ matchId: localStorage.getItem("matchId"), t1Score, t2Score }));
             return;
         }
         alert("Error updating score");
@@ -80,15 +82,21 @@ export default function Track() {
 
     const incrementScore = async (team) => {
         if (team === "team1") {
-            updateTeam1Score(team1Score + 1);
-            await sendScoreUpdate(team1Score, team2Score);
-            await checkWinner();
-            actions.push("t1");
+            updateTeam1Score(prevScore => {
+                const newScore = prevScore + 1;
+                sendScoreUpdate(newScore, team2Score);
+                checkWinner();
+                actions.push("t1");
+                return newScore;
+            });
         } else {
-            updateTeam2Score(team2Score + 1);
-            await sendScoreUpdate(team1Score, team2Score);
-            await checkWinner();
-            actions.push("t2");
+            updateTeam2Score(prevScore => {
+                const newScore = prevScore + 1;
+                sendScoreUpdate(team1Score, newScore);
+                checkWinner();
+                actions.push("t2");
+                return newScore;
+            });
         }
     }
 

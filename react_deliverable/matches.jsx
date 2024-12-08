@@ -12,28 +12,32 @@ export default function Matches() {
     const email = localStorage.getItem('email');
 
     const ws = new WebSocket('/ws');
-    ws.onmessage = function message(data) { 
+    ws.onmessage = function message(event) {
         console.log(`Websocket message received`);
         const reader = new FileReader();
         reader.onload = function() {
             try {
+                console.log("inside reader.onload");
                 const jsonData = JSON.parse(reader.result);
-                const newLiveMatches = [...liveMatches];
-                for (let i = 0; i < newLiveMatches.length; i++) {
-                    if (newLiveMatches[i].id === jsonData.matchId) {
-                        newLiveMatches[i].score1 = jsonData.team1Score;
-                        newLiveMatches[i].score2 = jsonData.team2Score;
-                        setLiveMatches(newLiveMatches);
-                        return;
-                    }
-                }
+                console.log("Web socket json data");
+                console.log(jsonData);
+                setLiveMatches(prevLiveMatches => {
+                    const newLiveMatches = prevLiveMatches.map(match => {
+                        if (match.uuid === jsonData.matchId) {
+                            console.log("id matched");
+                            return { ...match, score1: jsonData.team1Score, score2: jsonData.team2Score };
+                        }
+                        return match;
+                    });
+                    console.log("new live matches", newLiveMatches);
+                    return newLiveMatches;
+                });
             } catch (error) {
                 console.error('Error parsing websocket message:', error);
             }
         };
-        reader.readAsText(data.data);
+        reader.readAsText(event.data);
     };
-
 
     useEffect(() => {
         if (!id) {
@@ -118,7 +122,6 @@ export default function Matches() {
                         ))}
                     </>
                 }
-
             </div>
         </div>
     );
