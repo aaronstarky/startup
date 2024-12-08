@@ -11,33 +11,37 @@ export default function Matches() {
     const id = localStorage.getItem('id');
     const email = localStorage.getItem('email');
 
-    const ws = new WebSocket('/ws');
-    ws.onmessage = function message(event) {
-        console.log(`Websocket message received`);
-        const reader = new FileReader();
-        reader.onload = function() {
-            try {
-                console.log("inside reader.onload");
-                const jsonData = JSON.parse(reader.result);
-                console.log("Web socket json data");
-                console.log(jsonData);
-                setLiveMatches(prevLiveMatches => {
-                    const newLiveMatches = prevLiveMatches.map(match => {
-                        if (match.uuid === jsonData.matchId) {
-                            console.log("id matched");
-                            return { ...match, score1: jsonData.team1Score, score2: jsonData.team2Score };
-                        }
-                        return match;
+    useEffect(() => {
+        const ws = new WebSocket('/ws');
+        ws.onmessage = function message(event) {
+            console.log(`Websocket message received`);
+            const reader = new FileReader();
+            reader.onload = function() {
+                try {
+                    const jsonData = JSON.parse(reader.result);
+                    console.log("Web socket json data");
+                    console.log(jsonData);
+                    setLiveMatches(prevLiveMatches => {
+                        const newLiveMatches = prevLiveMatches.map(match => {
+                            if (match.uuid === jsonData.matchId) {
+                                return { ...match, score1: jsonData.team1Score, score2: jsonData.team2Score };
+                            }
+                            return match;
+                        });
+                        return newLiveMatches;
                     });
-                    console.log("new live matches", newLiveMatches);
-                    return newLiveMatches;
-                });
-            } catch (error) {
-                console.error('Error parsing websocket message:', error);
-            }
+                } catch (error) {
+                    console.error('Error parsing websocket message:', error);
+                }
+            };
+            reader.readAsText(event.data);
         };
-        reader.readAsText(event.data);
-    };
+
+        // Clean up the WebSocket connection when the component unmounts
+        return () => {
+            ws.close();
+        };
+    }, []); // Empty dependency array ensures this effect runs only once
 
     useEffect(() => {
         if (!id) {
@@ -113,6 +117,7 @@ export default function Matches() {
                         {matches.map((match, index) => (
                             <Match
                                 key={index}
+                                uuid={match.uuid}
                                 player1={match.player1}
                                 player2={match.player2}
                                 player1Score={match.score1}

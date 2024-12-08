@@ -1,8 +1,8 @@
 import './matchesStyles.css'
 
-export default function Match({ player1, player2, player1Score, player2Score, date }) {
+export default function Match({ uuid, player1, player2, player1Score, player2Score, date }) {
     return (
-        <div className="match-list-item">
+        <div className="match-list-item" id={uuid}>
             <div className="date">
                 {date}
             </div>

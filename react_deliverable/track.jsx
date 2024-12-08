@@ -13,7 +13,6 @@ export default function Track() {
     const ws = new WebSocket('/ws');
 
     ws.onmessage = function message(data) {
-        console.log(`Websocket message received: ${data}`);
     };
 
     if (initial) {
@@ -82,6 +81,7 @@ export default function Track() {
         if (team === "team1") {
             updateTeam1Score(prevScore => {
                 const newScore = prevScore + 1;
+                console.log("new score", newScore);
                 sendScoreUpdate(newScore, team2Score);
                 checkWinner();
                 actions.push("t1");
@@ -90,6 +90,7 @@ export default function Track() {
         } else {
             updateTeam2Score(prevScore => {
                 const newScore = prevScore + 1;
+                console.log("new score", newScore);
                 sendScoreUpdate(team1Score, newScore);
                 checkWinner();
                 actions.push("t2");
