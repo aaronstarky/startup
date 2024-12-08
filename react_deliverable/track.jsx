@@ -10,12 +10,12 @@ export default function Track() {
     let [initial, updateInitial] = React.useState(true);
     const navigate = useNavigate();
 
+    // const ws = new WebSocket('http://localhost:3000/ws');
     const ws = new WebSocket('/ws');
 
-    ws.onmessage = function (event) {  
-        const data = JSON.parse(event.data);
-        console.log("received: ", data);
-    }
+    ws.onmessage = function message(data) {
+        console.log(`Websocket message received: ${data}`);
+    };
 
     if (initial) {
         const encodedUrl = encodeURI(`/api/match/get/${localStorage.getItem("matchId")}`);
@@ -44,7 +44,7 @@ export default function Track() {
             },
         });
         if (response.status === 200) {
-            ws.send(`{"matchId": "${localStorage.getItem("matchId")}", "team1Score": ${team1Score}, "team2Score": ${team2Score}}`);
+            ws.send(JSON.stringify({ matchId: localStorage.getItem("matchId"), team1Score, team2Score }));
             return;
         }
         alert("Error updating score");
@@ -98,7 +98,7 @@ export default function Track() {
             updateTeam1Score(team1Score - 1);
         } else {
             if (team2Score != 0)
-            updateTeam2Score(team2Score - 1);
+                updateTeam2Score(team2Score - 1);
         }
         await sendScoreUpdate(team1Score, team2Score);
     }

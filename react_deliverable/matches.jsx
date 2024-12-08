@@ -11,6 +11,26 @@ export default function Matches() {
     const id = localStorage.getItem('id');
     const email = localStorage.getItem('email');
 
+    const ws = new WebSocket('/ws');
+    ws.onmessage = function message(data) { 
+        console.log(`Websocket message received`);
+        console.log(data);
+        try {
+            const jsonData = JSON.parse(data.data);
+            for (match of liveMatches) {
+                if (match.id === jsonData.matchId) {
+                    match.score1 = jsonData.team1Score;
+                    match.score2 = jsonData.team2Score;
+                    setLiveMatches([...liveMatches]);
+                    return;
+                }
+            }
+        } catch (error) {
+            console.error('Error parsing websocket message:', error);
+        }
+    };
+
+
     useEffect(() => {
         if (!id) {
             navigate('/login'); // Redirect to login page if no id
