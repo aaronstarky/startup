@@ -121,8 +121,8 @@ With this deliverable I created an Express.js backend for the application. This 
 For this deliverable, I am going to set up a websocket server that users connect to each time they view the matches page. On the matches page, they can view the scores of matches in which they are participating update in real time.
 
 - [X] Properly deploy simon deliverable to simon.Picklematch.click
-- [ ] Create websocket endpoints in index.js
-- [ ] Connect matches page to websocket endpoint in index.js
+- [X] Create websocket endpoints in index.js
+- [X] Connect matches page to websocket endpoint in index.js
 - [X] Add UI changes to Matches screen
 	- [X] add area for live matches to display
 	- [X] increase gap between elements within match cards

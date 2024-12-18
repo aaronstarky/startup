@@ -1164,3 +1164,120 @@ setInterval(() => {
 - Instead of letting the WebSocketServer control both the [[HTTP]] connection and the upgrading to [[WebSocket]], we want to use the [[HTTP]] connection that [[Express.js]] is providing and handle the upgrade to WebSocket ourselves. This is done by specifying the `noServer` option when creating the WebSocketServer and then handling the `upgrade` notification that occurs when a client requests the upgrade of the protocol from HTTP to WebSocket.
 ## How to exploit the innerHTML code
 To exploit the code that the client is executing in the client, type a message in the chat box, but include an `onclick` attribute in the [[HTML]] that you pass into the chat box. Then when you click the message, the event will trigger and you will have your code executing in the browser. However, I cannot get these messages to come through for the other user. Maybe it isn't possible.
+
+# TypeScript
+### Unions
+
+[[TypeScript]] introduces the ability to define the possible values for a new type. This is useful for doing things like defining an enumerable.
+
+With plain JavaScript you might create an enumerable with a class.
+
+```ts
+export class AuthState {
+  static Unknown = new AuthState('unknown');
+  static Authenticated = new AuthState('authenticated');
+  static Unauthenticated = new AuthState('unauthenticated');
+
+  constructor(name) {
+    this.name = name;
+  }
+}
+```
+
+With [[TypeScript]] you can define this by declaring a new type and defining what its possible values are.
+
+```ts
+type AuthState = 'unknown' | 'authenticated' | 'unauthenticated';
+
+let auth: AuthState = 'authenticated';
+```
+
+You can also use unions to specify all of the possible types that a variable can represent.
+
+```ts
+function square(n: number | string) {
+  if (typeof n === 'string') {
+    console.log(`{$n}^2`);
+  } else {
+    console.log(n * n);
+  }
+}
+```
+## PM2
+
+PM2 is a process manager for [[Node.js]] applications that runs services as daemons, ensuring they persist across system reboots. It's pre-installed on AWS AMI servers used in Simon projects, and deployment scripts automatically configure PM2. Here are some useful commands:
+
+|Command|Purpose|
+|---|---|
+|`pm2 ls`|List all hosted processes|
+|`pm2 monit`|Visual monitor|
+|`pm2 start index.js -n name`|Start a process with a specific name|
+|`pm2 restart name`|Restart a process|
+|`pm2 delete name`|Remove a process|
+|`pm2 save`|Save current processes for reboot persistence|
+## Registering a New Web Service
+1. Update the Caddyfile to route requests.
+2. Create a directory for the service.
+3. Configure PM2 to host it.
+## Example Setup
+
+Copy an existing service directory:
+
+```bash
+cp -r ~/services/startup ~/services/tacos
+```
+
+Modify the `index.js` file for your service:
+
+```js
+const port = process.argv[2] || 3000; 
+app.listen(port, () => console.log(`Listening on port ${port}`)); app.use(express.static('public'));
+```
+
+Start the service:
+```bash
+node index.js 5000
+```
+Configure PM2:
+```bash
+cd ~/services/tacos pm2 start index.js -n tacos -- 5000 pm2 save
+```
+## Security Practices
+- **Sanitize Input**: Prevent malicious data execution.
+- **Logging**: Track and review activity for anomalies.
+- **Traps**: Use decoy data to detect breaches.
+- **Educate**: Promote security awareness.
+- **Reduce Attack Surfaces**: Limit access points.
+- **Layered Security**: Combine multiple safeguards.
+- **Least Privilege**: Restrict user permissions.
+- **Credential Management**: Secure and rotate credentials.
+## OWASP Top 10 Highlights
+1. **Broken Access Control**: Enforce permissions at the service level.
+2. **Cryptographic Failures**: Use strong encryption for all data.
+3. **Injection Attacks**: Sanitize inputs and use prepared statements.
+4. **Insecure Design**: Incorporate security in design and testing.
+5. **Security Misconfiguration**: Regularly review and update configurations.
+6. **Outdated Components**: Keep dependencies updated.
+7. **Authentication Failures**: Implement rate limiting and multifactor authentication.
+8. **Data Integrity Failures**: Audit third-party components and workflows.
+9. **Logging Failures**: Ensure immutable, accessible logs with real-time alerts.
+10. **SSRF Attacks**: Validate and sanitize external requests.
+## Performance Monitoring
+## Key Areas
+
+1. Browser Latency: Optimize file sizes, use compression, and reduce requests.
+2. Network Latency: Minimize data transfer and use global CDNs.
+3. Service Latency: Keep endpoint response times under 10ms.
+## Tools
+- Chrome DevTools (Network & Performance tabs)
+- Lighthouse for performance audits
+## UX Design Principles
+
+## Simplicity
+Focus on clean interfaces with minimal distractions.
+## Navigation
+Provide clear paths through breadcrumbs, consistent menus, and device-specific controls.
+## Typography & Colors
+Use readable fonts (e.g., Sans Serif) and cohesive color schemes.
+## Accessibility
+Support screen readers, high contrast themes, and keyboard navigation.
